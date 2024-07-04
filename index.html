@@ -4,48 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Waddell Portfolio</title>
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <title>My Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-
-    <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <header>
-        <h1>My Portfolio</h1>
+    <header id="header">
         <nav>
-            <a href="#projects">Projects</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="#projects">PROJECTS</a>
+            <a href="#about">ABOUT</a>
+            <a href="#contact">CONTACT</a>
         </nav>
     </header>
 
-    <div class="container">
+    <main>
+        <section id="intro" class="intro">
+            <h1>Hi, I'm Victor Waddell</h1>
+            <div class="scroll-indicator">
+                <span>Scroll to continue
+                <div class="scroll-icon"></div></span>
+            </div>
+        </section>
+
         <section id="projects" class="projects">
-            <h2 class="section-title">Projects</h2>
+            <h2 class="section-title">PROJECTS</h2>
             <div class="project-item">
-                <h3>Project Title 1</h3>
+                <h3>PROJECT TITLE 1</h3>
                 <p>Description of project 1. A brief overview of what the project is about and its key features.</p>
             </div>
             <div class="project-item">
-                <h3>Project Title 2</h3>
+                <h3>PROJECT TITLE 2</h3>
                 <p>Description of project 2. A brief overview of what the project is about and its key features.</p>
             </div>
+            <!-- Add more project items as needed -->
         </section>
 
         <section id="about" class="about">
-            <h2 class="section-title">About Me</h2>
-            <p>Intro, background, skills, passions.</p>
+            <h2 class="section-title">ABOUT ME</h2>
+            <p>Introduce yourself. Share your background, skills, and what you are passionate about. Mention any relevant
+                experience or achievements.</p>
         </section>
-    </div>
+    </main>
 
     <footer>
         <p>&copy; 2024 My Portfolio. All rights reserved.</p>
-        <p><a href="https://github.com/victorwaddell">GitHub</a> | <a href="mailto:your.victor.waddell@gmail.com">Email</a></p>
+        <p><a href="https://github.com/yourusername">GitHub</a> | <a href="mailto:your.email@example.com">Email</a></p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 
 </html>

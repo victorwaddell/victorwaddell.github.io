@@ -1,57 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap');
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #f7f7fa;
     color: #333;
+    overflow-x: hidden;
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #354799;
     color: white;
-    padding: 1rem 2rem;
+    padding: 1rem;
     text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav {
-    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 nav a {
-    font-family: 'Roboto', sans-serif;
     color: white;
     text-decoration: none;
     margin: 0 1rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    position: relative;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 2rem;
+nav a::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    background-color: white;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav a:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.intro {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.intro h1 {
+    font-family: 'Playfair Display', serif;
+    color: #354799;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin: 0;
+    animation: fadeIn 2s ease-out;
+}
+
+.scroll-indicator {
+    margin-top: 2rem;
+    text-align: center;
+    animation: fadeIn 3s ease-out;
+}
+
+.scroll-indicator span {
+    display: block;
+    font-size: 1rem;
+    color: #354799;
+}
+
+.scroll-icon {
+    margin-top: 0.5rem;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #5766aa;
+    border-radius: 50%;
+    animation: scroll 1.5s infinite;
+    position: relative;
+}
+
+.scroll-icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #5766aa;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .section-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #4CAF50;
+    color: #5766aa;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .projects, .about {
-    margin-bottom: 2rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .project-item {
-    background-color: white;
-    padding: 1rem;
     margin-bottom: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -62,6 +180,9 @@ nav a {
 
 .project-item h3 {
     margin: 0 0 0.5rem;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    color: #5766aa;
 }
 
 .project-item p {
@@ -78,16 +199,42 @@ footer {
     color: white;
     text-align: center;
     padding: 1rem;
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
 }
 
 footer p {
-    margin: 0;
+    margin: 0.5rem 0;
 }
 
 footer a {
-    color: #4CAF50;
+    color: white;
     text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    nav a {
+        font-size: 0.9rem;
+    }
+
+    .intro h1 {
+        font-size: 2rem;
+    }
+
+    .intro p {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    .project-item h3 {
+        font-size: 1rem;
+    }
+
+    .about p {
+        font-size: 1rem;
+    }
 }
