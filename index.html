@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Victor Waddell Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -13,46 +13,88 @@
 
     <header id="header">
         <nav>
-            <a href="#projects">PROJECTS</a>
             <a href="#about">ABOUT</a>
-            <a href="#contact">CONTACT</a>
+            <a href="#experience">EXPERIENCE</a>
+            <a href="#contact">CONTACTS</a>
         </nav>
     </header>
 
     <main>
-        <section id="intro" class="intro">
-            <h1>Hi, I'm Victor Waddell</h1>
-            <div class="scroll-indicator">
-                <span>Scroll to continue
-                <div class="scroll-icon"></div></span>
+        <section id="about" class="profile-section">
+            <div class="profile-slideshow">
+                <div class="carousel">
+                    <div class="carousel-slide">
+                        <img src="assets/profilepics/vic1.jpg" alt="Victor Waddell" class="profile-image">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/profilepics/vic2.jpg" alt="Victor Waddell" class="profile-image">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/profilepics/vic3.jpg" alt="Victor Waddell" class="profile-image">
+                    </div>
+                </div>
+            </div>
+            <div class="intro-content">
+                <h1>Hi, I'm Victor Waddell</h1>
+                <div class="scroll-indicator">
+                    <span>Scroll to continue</span>
+                    <div class="scroll-icon"></div>
+                </div>
             </div>
         </section>
 
-        <section id="projects" class="projects">
-            <h2 class="section-title">PROJECTS</h2>
-            <div class="project-item">
-                <h3>PROJECT TITLE 1</h3>
-                <p>Description of project 1. A brief overview of what the project is about and its key features.</p>
-            </div>
-            <div class="project-item">
-                <h3>PROJECT TITLE 2</h3>
-                <p>Description of project 2. A brief overview of what the project is about and its key features.</p>
-            </div>
-            <!-- Add more project items as needed -->
+        <section id="experience" class="experience-section">
+            <h2 class="section-title">Job Experience</h2>
         </section>
 
-        <section id="about" class="about">
-            <h2 class="section-title">ABOUT ME</h2>
-            <p>Introduce yourself. Share your background, skills, and what you are passionate about. Mention any relevant
-                experience or achievements.</p>
+        <section class="job-section">
+            <div class="job">
+                <div class="job-image-section" id="job-image-section-1"></div>
+                <div class="job-description-section">
+                    <h3>AI Consultant and Dev</h3>
+                    <h4>Dietrich Computing and Operations (DCO) / CMU Summer 2023</h4>
+                    <ul>
+                        <li>Worked full-time as an intern and gained vast generative AI experience as the lead developer for the first-ever applications of generative AI for student learning and affairs at CMU.</li>
+                        <li>As part of Dietrich's AI Pilot program, I worked in a small team of four people, including the Associate Dean of IT Operations. I developed and designed prototype chatbot scripts using Retrieval Augmentation Generation (RAG). Laid much of the initial groundwork for an initiative that ultimately saved several hours for the professor and TAs of the partnered course by having students' exit tickets submitted and summarized through a generative AI chatbot.</li>
+                        <li>Proposed and demonstrated how students could chat with their syllabi and readings using RAG and generative AI powered by Langchain and GPT-4. As a result, I became the go-to expert in this emerging field and was sought out numerous times for advice and insight.</li>
+                        <li>Initially consulted full-time as an intern to propose integrating the first working Generative AI-powered solution at CMU for a compact team of eight within Dietrich College. I proposed switching to Microsoft’s Azure with generative AI capabilities for the department’s ticketing and internal operations, which aligned with the vision of the Associate Dean of IT Operations.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
+
+        <section class="job-section">
+            <div class="job">
+                <div class="job-image-section" id="job-image-section-2"></div>
+                <div class="job-description-section">
+                    <h3>Application Security Intern</h3>
+                    <h4>Seiso LLC / Summer 2022</h4>
+                    <ul>
+                        <li>Partnered closely with the Lead Application and Security Developer, adopting part of their role's responsibilities, enabling them to concentrate on critical external client projects</li>
+                        <li>Implemented numerous patches to scripts, adhering to established protocols and guidelines through Agile methodologies, gaining hands-on experience with GitHub, continuous integration and continuous deployment (CI/CD), bash, and Linux.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="job-section">
+            <div class="job">
+                <div class="job-image-section" id="job-image-section-3"></div>
+                <div class="job-description-section">
+                    <h3>IT Associate</h3>
+                    <h4>DCO / CMU 2021 - 2023</h4>
+                    <ul>
+                        <li>Worked full-time as an intern and gained vast generative AI experience as the lead developer for the first-ever applications of generative AI for student learning and affairs at CMU. As part of Dietrich's AI Pilot program, I worked in a small team of four people, including the Associate Dean of IT Operations. I developed and designed prototype chatbot scripts using Retrieval Augmentation Generation (RAG). Laid much of the initial groundwork for an initiative that ultimately saved several hours for the professor and TAs of the partnered course by having students' exit tickets submitted and summarized through a generative AI chatbot.</li>
+                        <li>Proposed and demonstrated how students could chat with their syllabi and readings using RAG and generative AI powered by Langchain and GPT-4. As a result, I became the go-to expert in this emerging field and was sought out numerous times for advice and insight.</li>
+                        <li>Initially consulted full-time as an intern to propose integrating the first working Generative AI-powered solution at CMU for a compact team of eight within Dietrich College. I proposed switching to Microsoft’s Azure with generative AI capabilities for the department’s ticketing and internal operations, which aligned with the vision of the Associate Dean of IT Operations.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer>
-        <p>&copy; 2024 My Portfolio. All rights reserved.</p>
-        <p><a href="https://github.com/yourusername">GitHub</a> | <a href="mailto:your.email@example.com">Email</a></p>
-    </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 
