@@ -1,18 +1,79 @@
+// Profile Image Carousel
 document.addEventListener('DOMContentLoaded', () => {
-    // Carousel functionality for profile images
-    const carousel = document.querySelector('.carousel');
-    const slides = document.querySelectorAll('.carousel-slide');
-    let currentIndex = 0;
+    function initProfileCarousel() {
+        const carousel = document.querySelector('.profile-carousel');
+        const slides = document.querySelectorAll('.profile-carousel-slide');
+        let currentIndex = 0;
 
-    const changeSlide = () => {
-        slides.forEach((slide, index) => {
-            slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+        const changeSlide = () => {
+            slides.forEach((slide, index) => {
+                slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+            });
+
+            currentIndex = (currentIndex + 1) % slides.length;
+        };
+
+        setInterval(changeSlide, 8000); // Change slide every 8 seconds
+    }
+
+    initProfileCarousel();
+});
+
+// Job Experience Carousel
+document.addEventListener('DOMContentLoaded', () => {
+    function initJobCarousel() {
+        const carousel = document.querySelector('.job-carousel');
+        const items = document.querySelectorAll('.job-carousel-item');
+        const nextButton = document.querySelector('.carousel-control.next');
+        const prevButton = document.querySelector('.carousel-control.prev');
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            items.forEach((item, index) => {
+                item.classList.remove('active');
+                if (index === currentIndex) {
+                    item.classList.add('active');
+                } else {
+                    item.style.transform = index < currentIndex ? `translateX(-100%)` : `translateX(100%)`;
+                }
+            });
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        }
+
+        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+
+        // Touch swipe for mobile
+        let startX, endX;
+
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
         });
 
-        currentIndex = (currentIndex + 1) % slides.length;
-    };
+        carousel.addEventListener('touchmove', (e) => {
+            endX = e.touches[0].clientX;
+        });
 
-    setInterval(changeSlide, 8000); // Change slide every 8 seconds
+        carousel.addEventListener('touchend', () => {
+            if (startX - endX > 50) nextSlide();
+            if (endX - startX > 50) prevSlide();
+        });
+
+        updateCarousel();
+    }
+
+    initJobCarousel();
 
     // Three.js functionality for job image
     const initThreeJS = (containerId, imageUrl) => {
@@ -70,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initThreeJS('job-image-section-1', 'assets/product-management-icon.png');
-    initThreeJS('job-image-section-2', 'assets/icon-incident-response-program-blue.png');
-    initThreeJS('job-image-section-3', 'assets/pngtree-online-support-icon-from-commerce-set-phone-support-online-ask-vector-png-image_19475604.png');
+    initThreeJS('job-image-section-2', 'assets/cyber.png');
+    initThreeJS('job-image-section-3', 'assets/information-systems-icon.png');
 });
 
 // Fade-in effect for sections

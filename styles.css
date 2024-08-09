@@ -24,7 +24,6 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    opacity: 1;
 }
 
 nav {
@@ -78,18 +77,15 @@ section.in-view {
     opacity: 1;
 }
 
+/* Profile Section Carousel */
 .profile-section {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-right: 10rem;
-    padding: 4rem 2rem;
     background-color: #f4f4f9;
-    top: 25px;
-    left: 0;
     width: 50vw;
-    height: calc(100vh - 25px);
+    height: calc(100vh - 50px);
     overflow: hidden;
 }
 
@@ -102,7 +98,7 @@ section.in-view {
     position: relative;
 }
 
-.carousel {
+.profile-carousel {
     width: 100%;
     height: 100%;
     display: flex;
@@ -110,7 +106,7 @@ section.in-view {
     position: relative;
 }
 
-.carousel-slide {
+.profile-carousel-slide {
     min-width: 100%;
     transition: transform 1s ease;
 }
@@ -143,7 +139,6 @@ section.in-view {
 }
 
 .scroll-indicator span {
-    display: block;
     font-size: 1rem;
     color: #405AB4;
 }
@@ -182,163 +177,190 @@ section.in-view {
     }
 }
 
-/* Mobile-friendly styles */
-@media (max-width: 768px) {
-    .profile-section {
-        flex-direction: column;
-    }
-
-    .profile-slideshow {
-        max-width: 90vw;
-        max-height: 40vh;
-    }
-
-    .intro-content {
-        margin-left: 0;
-        margin-top: 2rem;
-    }
-
-    .intro h1 {
-        font-size: 1.5rem;
-    }
-
-    .scroll-indicator {
-        margin-top: 1rem;
-    }
-}
-
-.experience-section {
-    background-color: #f4f4f9;
-    padding: 4rem 2rem;
-}
-
-.section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: #405AB4;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.job-section {
+/* Job Experience Carousel */
+.job-carousel-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: relative;
     width: 100%;
+    overflow: auto; /* Allow overflow auto to enable scrolling if needed */
+    padding: 20px 50px; /* Add padding to the container to avoid sticking to the edges */
+}
+
+.job-carousel {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Space between carousel items */
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 50%; /* Adjusted width for the active item */
+    opacity: 0.5;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative;
+}
+
+.carousel-item.active {
+    height: 70vh; /* 70% of the viewport height for the active item */
+    opacity: 1;
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.carousel-item:nth-child(2) {
+    height: 60vh; /* Slightly smaller height for the first inactive item */
+    min-width: 30%; /* Manually adjusted width */
+    transform: scale(0.9);
+}
+
+.carousel-item:nth-child(3) {
+    height: 50vh; /* Even smaller height for the second inactive item */
+    min-width: 20%; /* Manually adjusted width */
+    transform: scale(0.8);
+}
+
+.job-card {
     background-color: #fff;
-    padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.job-section:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
-}
-
-.job {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    text-align: left;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+    justify-content: space-between;
+    padding: 30px; /* Add padding inside the job cards */
+    height: 100%; /* Make the job card fill the height of the carousel item */
 }
 
 .job-image-section {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-}
-
-.job-image-section img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.job-image-section:hover img {
-    transform: scale(1.1);
+    height: auto;
+    width: 35%;
+    margin-left: 20px;
+    background-size: cover;
+    background-position: center;
 }
 
 .job-description-section {
     width: 60%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
-    text-align: left;
-    padding: 2rem;
-    background-color: #f4f4f9;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding-right: 20px; /* Add padding to the right of the text */
+    position: relative;
+}
+
+.blue-bar {
+    position: absolute;
+    bottom: -50px; /* 50px below the card */
+    left: 50%;
+    transform: translateX(-50%);
+    height: 5px;
+    width: 30%;
+    background-color: #405AB4; /* Default blue for active item */
+    transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+.carousel-item:not(.active) .blue-bar {
+    background-color: #ccc; /* Greyed out for inactive items */
+}
+
+.carousel-item.active:hover .blue-bar {
+    background-color: #7d9df5; /* Slightly lighter blue on hover for active item */
+}
+
+.carousel-item:not(.active):hover {
+    transform: scale(0.85);
+    opacity: 0.7;
 }
 
 .job-description-section h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: #405AB4;
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .job-description-section h4 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #405AB4;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
 }
 
 .job-description-section ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
-.job-description-section li {
-    margin-bottom: 1rem;
+.job-description-section ul li {
+    font-size: 0.9rem;
+    color: #333;
     line-height: 1.5;
-    font-size: 1rem;
-    color: #333;
-    position: relative;
-    padding-left: 1.5rem;
+    margin-bottom: 10px;
 }
 
-.job-description-section li::before {
-    content: '✔';
+.carousel-control {
     position: absolute;
-    left: 0;
-    color: #405AB4;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
 }
 
-.job-description-section li:hover::before {
-    color: #333;
+.carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.job-description-section h3:hover {
-    color: #333;
+.carousel-control.prev {
+    left: 10px;
 }
 
-/* Mobile-friendly */
+.carousel-control.next {
+    right: 10px;
+}
+
+/* Add smooth hover effects and depth illusion for non-active items */
+.carousel-item:not(.active):hover {
+    transform: scale(0.85);
+    opacity: 0.7;
+}
+
+/* Mobile-friendly styles */
 @media (max-width: 768px) {
-    .job {
-        flex-direction: column;
+    .carousel-item {
+        min-width: 80%;
     }
 
-    .job-image-section {
-        width: 80%;
-        height: 40vh;
+    .carousel-item.active {
+        min-width: 90%;
+        height: 70vh; /* Maintain 70% height for active on mobile */
+    }
+
+    .carousel-item:nth-child(2) {
+        height: 40vh; /* Adjusted for mobile */
+        min-width: 60%; /* Adjusted width for mobile */
+    }
+
+    .carousel-item:nth-child(3) {
+        height: 30vh; /* Adjusted for mobile */
+        min-width: 40%; /* Adjusted width for mobile */
     }
 
     .job-description-section {
         width: 100%;
-        height: auto; 
+    }
+
+    .job-image-section {
+        display: none;
     }
 }
