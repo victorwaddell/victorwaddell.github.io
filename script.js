@@ -1,128 +1,50 @@
-// Profile Image Carousel
 document.addEventListener('DOMContentLoaded', () => {
-    function initProfileCarousel() {
-        const carousel = document.querySelector('.profile-carousel');
-        const slides = document.querySelectorAll('.profile-carousel-slide');
-        let currentIndex = 0;
-
-        const changeSlide = () => {
-            slides.forEach((slide, index) => {
-                slide.style.transform = `translateX(-${currentIndex * 100}%)`;
-            });
-
-            currentIndex = (currentIndex + 1) % slides.length;
-        };
-
-        setInterval(changeSlide, 8000); // Change slide every 8 seconds
-    }
-
-    initProfileCarousel();
-});
-
-// Job Experience Carousel
-document.addEventListener('DOMContentLoaded', () => {
-    function initJobCarousel() {
-        const carousel = document.querySelector('.job-carousel');
-        const items = document.querySelectorAll('.job-carousel-item');
-        const nextButton = document.querySelector('.carousel-control.next');
-        const prevButton = document.querySelector('.carousel-control.prev');
-
-        let currentIndex = 0;
-
-        function updateCarousel() {
-            items.forEach((item, index) => {
-                item.classList.remove('active');
-                if (index === currentIndex) {
-                    item.classList.add('active');
-                } else {
-                    item.style.transform = index < currentIndex ? `translateX(-100%)` : `translateX(100%)`;
-                }
-            });
-            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % items.length;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + items.length) % items.length;
-            updateCarousel();
-        }
-
-        nextButton.addEventListener('click', nextSlide);
-        prevButton.addEventListener('click', prevSlide);
-
-        // Touch swipe for mobile
-        let startX, endX;
-
-        carousel.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        carousel.addEventListener('touchmove', (e) => {
-            endX = e.touches[0].clientX;
-        });
-
-        carousel.addEventListener('touchend', () => {
-            if (startX - endX > 50) nextSlide();
-            if (endX - startX > 50) prevSlide();
-        });
-
-        updateCarousel();
-    }
-
-    initJobCarousel();
-
-    // Three.js functionality for job image
-    const initThreeJS = (containerId, imageUrl) => {
+    // Function to initialize the 3D image
+    const initBasicThreeJS = (containerId, imageUrl) => {
         const container = document.getElementById(containerId);
+        if (!container) {
+            console.error('Container not found:', containerId);
+            return;
+        }
+
+        // Set container dimensions and initially hide it
+        container.style.width = '400px';
+        container.style.height = '400px';
+        container.style.visibility = 'hidden';
+        container.style.opacity = '0';
+        container.style.transition = 'opacity 0.5s ease';
+
+        // Clear any existing content
+        container.innerHTML = '';
+
+        // Create the Three.js scene
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
+        camera.position.z = 3.5;
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
 
-        // Create multiple layers to simulate depth
+        // Load the texture and create a plane geometry
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load(imageUrl, (texture) => {
-            const layerCount = 30;
-            const layerDistance = 0.005;
-            
-            for (let i = 0; i < layerCount; i++) {
-                const geometry = new THREE.PlaneGeometry(1.5, 1.5);
-                const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
-                const plane = new THREE.Mesh(geometry, material);
-                plane.position.z = -i * layerDistance;
-                scene.add(plane);
-            }
+            const geometry = new THREE.PlaneGeometry(2.5, 2.5);
+            const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+            const plane = new THREE.Mesh(geometry, material);
+            scene.add(plane);
 
-            camera.position.z = 5; // Camera
-
-            let rotationY = 0;
-            let direction = 1;
-            const maxRotation = 0.6; // Maximum rotation angle in radians
+            // Start the rotation animation
             const animate = () => {
-                requestAnimationFrame(animate);
-
-                rotationY += direction * 0.001; // Rotation increment
-
-                if (rotationY > maxRotation || rotationY < -maxRotation) {
-                    direction *= -1;
-                }
-                scene.rotation.y = rotationY;
-
+                plane.rotation.y += 0.01;
                 renderer.render(scene, camera);
+                requestAnimationFrame(animate);
             };
-
             animate();
-        }, undefined, (error) => {
-            console.error('An error occurred loading the texture:', error);
         });
 
+        // Handle window resizing
         window.addEventListener('resize', () => {
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
@@ -130,35 +52,92 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    initThreeJS('job-image-section-1', 'assets/product-management-icon.png');
-    initThreeJS('job-image-section-2', 'assets/cyber.png');
-    initThreeJS('job-image-section-3', 'assets/information-systems-icon.png');
-});
+    // Function to handle the activation of job cards
+    const activateCard = (card) => {
+        // Deactivate all job cards and hide their images
+        const allCards = document.querySelectorAll('.job-card');
+        allCards.forEach((otherCard) => {
+            if (otherCard !== card) {
+                otherCard.classList.remove('active');
+                otherCard.classList.add('inactive');
+                const imageContainer = otherCard.nextElementSibling;
+                if (imageContainer) {
+                    imageContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        imageContainer.style.visibility = 'hidden';
+                    }, 500); // Match the transition duration
+                }
+            }
+        });
 
-// Fade-in effect for sections
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-        } else {
-            entry.target.classList.remove('in-view');
+        // Activate the clicked card
+        card.classList.add('active');
+        card.classList.remove('inactive');
+        const imageContainer = card.nextElementSibling;
+        if (imageContainer) {
+            imageContainer.style.visibility = 'visible';
+            imageContainer.style.opacity = '1';
         }
+    };
+
+    // Event listeners for job cards
+    const jobCards = document.querySelectorAll('.job-card');
+    jobCards.forEach((card) => {
+        // Initialize 3D images for all job cards on page load
+        const jobId = card.getAttribute('id');
+        const imageUrl = getImageUrlForJob(jobId);
+        const imageContainer = card.nextElementSibling;
+        if (imageContainer && imageUrl) {
+            initBasicThreeJS(imageContainer.id, imageUrl);
+        }
+
+        // Hover effects
+        card.addEventListener('mouseenter', () => {
+            const imageContainer = card.nextElementSibling;
+            if (imageContainer && !card.classList.contains('active')) {
+                imageContainer.style.visibility = 'visible';
+                imageContainer.style.opacity = '1';
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            const imageContainer = card.nextElementSibling;
+            if (imageContainer && !card.classList.contains('active')) {
+                imageContainer.style.opacity = '0';
+                setTimeout(() => {
+                    if (!card.classList.contains('active')) {
+                        imageContainer.style.visibility = 'hidden';
+                    }
+                }, 500); // Match the transition duration
+            }
+        });
+
+        // Click to activate
+        card.addEventListener('click', () => {
+            activateCard(card);
+        });
     });
-}, { threshold: 0.1 });
 
-document.querySelectorAll('section').forEach((section) => {
-    observer.observe(section);
-});
+    // Ensure the active card's 3D image is visible on page load
+    const activeCard = document.querySelector('.job-card.active');
+    if (activeCard) {
+        const imageContainer = activeCard.nextElementSibling;
+        if (imageContainer) {
+            imageContainer.style.visibility = 'visible';
+            imageContainer.style.opacity = '1';
+        }
+    }
 
-// Blur effect based on scroll position
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const viewportHeight = window.innerHeight;
-
-    sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const distanceFromCenter = Math.abs(rect.top + rect.height / 2 - viewportHeight / 2);
-        const blurValue = Math.min(distanceFromCenter / 500, 5); // Blur area
-        section.style.filter = `blur(${blurValue}px)`;
-    });
+    function getImageUrlForJob(jobId) {
+        switch (jobId) {
+            case 'job-1':
+                return 'assets/product-management-icon.png';
+            case 'job-2':
+                return 'assets/cyber.png';
+            case 'job-3':
+                return 'assets/information-systems-icon.png';
+            default:
+                return '';
+        }
+    }
 });

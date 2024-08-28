@@ -1,35 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap');
+/* Define the primary color and its variants */
+:root {
+    --primary-color: #405AB4;
+    --hover-color: #7d9df5; /* Lighter blue for hover effects */
+    --active-color: #e0e7ff; /* Very light blue for active state */
+    --card-bg-color: #f9f9f9; /* Off-white color for the cards */
+    --inactive-card-color: #ececec; /* Slightly more grey for inactive cards */
+}
 
+/* Body and global styles */
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     scroll-behavior: smooth;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
+/* Webkit Scrollbar */
+::-webkit-scrollbar {
+    width: 0.625rem; /* 10px equivalent */
+}
+
+::-webkit-scrollbar-track {
+    background: #f4f4f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 0.3125rem; /* 5px equivalent */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-color);
+}
+
+/* Header */
 header {
-    background-color: #405AB4;
+    background-color: var(--primary-color);
     color: white;
-    height: 50px;
-    width: 100%;
+    height: 3.125rem; /* 50px equivalent */
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: sticky;
-    top: 0;
+    justify-content: space-between;
+    position: fixed;
+    top: -3.125rem; /* Start hidden, 50px equivalent */
+    width: 100%;
     z-index: 1000;
+    padding: 0 1.25rem; /* 20px equivalent */
+    transition: top 0.5s ease;
+}
+
+.header-visible {
+    top: 0; /* Make the header visible */
+}
+
+.nav-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: auto;
 }
 
 nav {
     display: flex;
-    justify-content: center;
-    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute; /* Position it absolutely */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to be exactly in the center */
 }
 
 nav a {
@@ -44,8 +83,8 @@ nav a::before {
     content: "";
     position: absolute;
     width: 0;
-    height: 2px;
-    bottom: -2px;
+    height: 0.125rem; /* 2px equivalent */
+    bottom: -0.125rem;
     left: 50%;
     background-color: white;
     transition: width 0.3s ease, left 0.3s ease;
@@ -56,6 +95,7 @@ nav a:hover::before {
     left: 0;
 }
 
+/* Main Content and Sections */
 main {
     width: 100%;
     display: flex;
@@ -66,88 +106,100 @@ main {
 section {
     width: 100%;
     height: 100vh;
+    padding: 2rem 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: opacity 1s ease-out, filter 1s ease-out;
-    opacity: 0;
+    text-align: center;
 }
 
-section.in-view {
-    opacity: 1;
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin: 0;
+    color: #405AB4;
 }
 
-/* Profile Section Carousel */
+/* Profile Section */
 .profile-section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f9;
-    width: 50vw;
-    height: calc(100vh - 50px);
-    overflow: hidden;
-}
-
-.profile-slideshow {
-    width: 50%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url('assets/profilepatch.jpg') center center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.profile-carousel {
+.profile-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    overflow: hidden;
-    position: relative;
+    background: linear-gradient(to bottom, rgba(244, 244, 249, 0) 60%, rgba(244, 244, 249, 1) 100%);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.5s ease;
 }
 
-.profile-carousel-slide {
-    min-width: 100%;
-    transition: transform 1s ease;
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%; /* Keep the profile container at 60% of the page width */
+    z-index: 2;
 }
 
 .profile-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 5px;
+    height: 60vh;
+    width: auto;
+    object-fit: contain;
+    border-radius: 0.9375rem; /* 15px equivalent */
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.2); /* 4px 15px equivalent */
 }
 
 .intro-content {
-    margin-left: 10rem;
-    text-align: center;
+    color: white;
+    text-align: left;
+    white-space: nowrap;
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .intro-content h1 {
     font-family: 'Playfair Display', serif;
-    color: #405AB4;
-    text-transform: uppercase;
     font-size: 3rem;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+/* Scroll Indicator */
 .scroll-indicator {
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .scroll-indicator span {
+    display: block;
     font-size: 1rem;
-    color: #405AB4;
+    color: white;
 }
 
 .scroll-icon {
     margin-top: 0.5rem;
-    width: 24px;
-    height: 24px;
-    border: 2px solid #405AB4;
+    width: 1.5rem; /* 24px equivalent */
+    height: 1.5rem;
+    border: 0.125rem solid white; /* 2px equivalent */
     border-radius: 50%;
     animation: scroll 1.5s infinite;
     position: relative;
@@ -158,9 +210,9 @@ section.in-view {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 8px;
-    height: 8px;
-    background-color: #405AB4;
+    width: 0.5rem; /* 8px equivalent */
+    height: 0.5rem;
+    background-color: white;
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
@@ -170,124 +222,101 @@ section.in-view {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(10px);
+        transform: translateY(0.625rem); /* 10px equivalent */
     }
     100% {
         transform: translateY(0);
     }
 }
 
-/* Job Experience Carousel */
-.job-carousel-container {
+/* Job Experience Section */
+.job-list {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    position: relative;
-    width: 100%;
-    overflow: auto; /* Allow overflow auto to enable scrolling if needed */
-    padding: 20px 50px; /* Add padding to the container to avoid sticking to the edges */
+    flex-direction: column; 
+    width: 100%;   
+    align-items: left;
 }
 
-.job-carousel {
+.job-card-container {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 30px; /* Space between carousel items */
-    width: 100%;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    min-width: 50%; /* Adjusted width for the active item */
-    opacity: 0.5;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    position: relative;
-}
-
-.carousel-item.active {
-    height: 70vh; /* 70% of the viewport height for the active item */
-    opacity: 1;
-    transform: scale(1.1);
-    z-index: 2;
-}
-
-.carousel-item:nth-child(2) {
-    height: 60vh; /* Slightly smaller height for the first inactive item */
-    min-width: 30%; /* Manually adjusted width */
-    transform: scale(0.9);
-}
-
-.carousel-item:nth-child(3) {
-    height: 50vh; /* Even smaller height for the second inactive item */
-    min-width: 20%; /* Manually adjusted width */
-    transform: scale(0.8);
+    justify-content: space-between;
+    width: 70%;
+    margin-left: 15%; /* Add margin to the left of the job card container */
+    padding: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .job-card {
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    text-align: left;
+    position: relative;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    padding: 1rem 2rem; /* Increase padding to make the card longer */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    transform-origin: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 30px; /* Add padding inside the job cards */
-    height: 100%; /* Make the job card fill the height of the carousel item */
-}
-
-.job-image-section {
+    align-items: left;
+    cursor: pointer;
+    width: 100%; /* Increase card width to 65% of the page */
     height: auto;
-    width: 35%;
-    margin-left: 20px;
-    background-size: cover;
-    background-position: center;
+    text-align: left;
+    overflow: visible;
+    z-index: 1;
+    margin-left: 2.5rem;
 }
 
 .job-description-section {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-right: 20px; /* Add padding to the right of the text */
+    width: 100%;
+}
+
+/* Image container styling */
+.job-image-container {
+    width: auto;
+    height: 110%;
+    flex-shrink: 0;
+    transition: opacity 0.5s ease;
     position: relative;
 }
 
-.blue-bar {
-    position: absolute;
-    bottom: -50px; /* 50px below the card */
-    left: 50%;
-    transform: translateX(-50%);
-    height: 5px;
-    width: 30%;
-    background-color: #405AB4; /* Default blue for active item */
-    transition: background-color 0.3s ease, width 0.3s ease;
+/* Hover and active states */
+.job-card.active + .job-image-container {
+    opacity: 1;
+    transform: translateY(-50%);
 }
 
-.carousel-item:not(.active) .blue-bar {
-    background-color: #ccc; /* Greyed out for inactive items */
+.job-card.active {
+    background-color: var(--active-color);
+    transform: translateX(-10%) scale(1.2); /* Translate the entire card left */
 }
 
-.carousel-item.active:hover .blue-bar {
-    background-color: #7d9df5; /* Slightly lighter blue on hover for active item */
+.job-card.inactive {
+    background-color: var(--inactive-card-color);
+    transform: scale(0.9);
+    opacity: 0.6;
 }
 
-.carousel-item:not(.active):hover {
-    transform: scale(0.85);
-    opacity: 0.7;
+.job-card.inactive:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
 }
 
 .job-description-section h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
 .job-description-section h4 {
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: #405AB4;
-    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
 }
 
 .job-description-section ul {
@@ -296,71 +325,75 @@ section.in-view {
 }
 
 .job-description-section ul li {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #333;
     line-height: 1.5;
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
 }
 
-.carousel-control {
-    position: absolute;
+/* 3D Image Section */
+.job-image-container {
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 10;
-    padding: 10px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
+    width: auto;
+    height: 100%;
+    margin-left: 5rem;
+    z-index: 999; /* Ensure it's on top of other elements */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible; /* Ensure visibility */
+    pointer-events: none; /* Prevent the container from blocking interactions */
 }
 
-.carousel-control:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.carousel-control.prev {
-    left: 10px;
-}
-
-.carousel-control.next {
-    right: 10px;
-}
-
-/* Add smooth hover effects and depth illusion for non-active items */
-.carousel-item:not(.active):hover {
-    transform: scale(0.85);
-    opacity: 0.7;
-}
-
-/* Mobile-friendly styles */
-@media (max-width: 768px) {
-    .carousel-item {
-        min-width: 80%;
+/* Mobile-Friendly Styles */
+@media (max-width: 48rem) { /* 768px equivalent */
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
     }
 
-    .carousel-item.active {
-        min-width: 90%;
-        height: 70vh; /* Maintain 70% height for active on mobile */
+    .profile-image {
+        max-width: 80vw;
+        height: auto;
+        margin-bottom: 1.25rem;
     }
 
-    .carousel-item:nth-child(2) {
-        height: 40vh; /* Adjusted for mobile */
-        min-width: 60%; /* Adjusted width for mobile */
+    .intro-content {
+        max-width: 90%;
+        text-align: center;
+        align-items: center;
+        white-space: normal;
     }
 
-    .carousel-item:nth-child(3) {
-        height: 30vh; /* Adjusted for mobile */
-        min-width: 40%; /* Adjusted width for mobile */
+    .job-list {
+        align-items: center;
+    }
+
+    .job-card-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%; /* Limit the job card container width to 60% of the page */
+        margin-left: 15%; /* Add margin to the left of the job card container */
+    }
+
+    .job-card {
+        width: 100%; /* Adjust the card width for mobile */
+        margin-left: 0; /* Center the card */
+    }
+
+    .job-image-container {
+        display: none; /* Hide the image container on mobile */
     }
 
     .job-description-section {
         width: 100%;
     }
 
-    .job-image-section {
-        display: none;
+    .intro-content h1 {
+        font-size: 2rem;
     }
 }

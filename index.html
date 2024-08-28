@@ -1,66 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victor Waddell Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-
 <body>
 
     <header id="header">
+        <div class="nav-title">VICTOR WADDELL</div>
         <nav>
-            <a href="#about">ABOUT</a>
-            <a href="#experience">EXPERIENCE</a>
-            <a href="#contact">CONTACTS</a>
+            <a href="#about">about</a>
+            <a href="#experience">experience</a>
+            <a href="#contact">contact</a>
         </nav>
     </header>
 
     <main>
         <!-- Landing Page and Intro -->
-        <section id="about" class="profile-section">
-            <div class="profile-slideshow">
-                <div class="profile-carousel">
-                    <div class="carousel-slide">
-                        <img src="assets/profilepics/vic1.jpg" alt="Victor Waddell" class="profile-image">
+        <section id="landing" class="profile-section">
+            <div class="profile-container">
+                <img src="assets/profilepics/vic1.jpg" alt="Victor Waddell" class="profile-image">
+                <div class="intro-content">
+                    <h1>Hi, I'm Victor Waddell</h1>
+                    <div class="scroll-indicator">
+                        <span>Scroll to continue</span>
+                        <div class="scroll-icon"></div>
                     </div>
-                    <div class="carousel-slide">
-                        <img src="assets/profilepics/vic2.jpg" alt="Victor Waddell" class="profile-image">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="assets/profilepics/vic3.jpg" alt="Victor Waddell" class="profile-image">
-                    </div>
-                </div>
-            </div>
-            <div class="intro-content">
-                <h1>Hi, I'm Victor Waddell</h1>
-                <div class="scroll-indicator">
-                    <span>Scroll to continue</span>
-                    <div class="scroll-icon"></div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
+        <!-- About Me Section -->
         <section id="about" class="about-section">
-            <h2 class="section-title">About  Me</h2>
+            <h2 class="section-title">About Me</h2>
+            <p>Welcome to my portfolio! I'm Victor Waddell, a software developer with a passion for technology, video games, and caring for the community. Explore my journey and experiences as you scroll through my work and achievements.</p>
         </section>
 
-        <!-- Job Experience -->
+        <!-- Job Experience Section -->
         <section id="experience" class="experience-section">
-            <h2 class="section-title">Job Experience</h2>
-        </section>
-
-        <section id="job-carousel" class="job-carousel-container">
-            <button class="carousel-control prev">&#10094;</button>
-            <div class="job-carousel">
-                <div class="carousel-item active">
-                    <div class="job-card">
+            <h2 class="section-title">Job Experience</h2><br><br>
+            <div class="job-list">
+                <div class="job-card-container">
+                    <div class="job-card active" id="job-1">
                         <div class="job-description-section">
-                            <div class="blue-bar"></div>
                             <h3>AI Consultant and Dev</h3>
                             <h4>Dietrich Computing and Operations (DCO) / CMU Summer 2023</h4>
                             <ul>
@@ -68,13 +55,15 @@
                                 <li>Proposed and demonstrated how students could chat with their syllabi and readings using RAG and generative AI powered by Langchain and GPT-4.</li>
                             </ul>
                         </div>
-                        <div class="job-image-section" id="job-image-section-1"></div>
+                    </div>
+                    <div class="job-image-container" id="job-image-section-1">
+                        <!-- 3D Image will be rendered here by Three.js -->
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="job-card">
+
+                <div class="job-card-container">
+                    <div class="job-card inactive" id="job-2">
                         <div class="job-description-section">
-                            <div class="blue-bar"></div>
                             <h3>Application Security Intern</h3>
                             <h4>Seiso LLC / Summer 2022</h4>
                             <ul>
@@ -82,13 +71,15 @@
                                 <li>Implemented numerous patches to scripts, adhering to established protocols and guidelines through Agile methodologies.</li>
                             </ul>
                         </div>
-                        <div class="job-image-section" id="job-image-section-2"></div>
+                    </div>
+                    <div class="job-image-container" id="job-image-section-2">
+                        <!-- 3D Image will be rendered here by Three.js -->
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="job-card">
+
+                <div class="job-card-container">
+                    <div class="job-card inactive" id="job-3">
                         <div class="job-description-section">
-                            <div class="blue-bar"></div>
                             <h3>IT Associate</h3>
                             <h4>DCO / CMU 2021 - 2023</h4>
                             <ul>
@@ -96,17 +87,24 @@
                                 <li>Proposed and demonstrated how students could chat with their syllabi and readings using RAG and generative AI powered by Langchain and GPT-4.</li>
                             </ul>
                         </div>
-                        <div class="job-image-section" id="job-image-section-3"></div>
+                    </div>
+                    <div class="job-image-container" id="job-image-section-3">
+                        <!-- 3D Image will be rendered here by Three.js -->
                     </div>
                 </div>
             </div>
-            <button class="carousel-control next">&#10095;</button>
         </section>
 
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-buttons">
+                <a href="https://www.linkedin.com/in/victorwaddell" class="contact-button">LinkedIn</a>
+                <a href="https://github.com/victorwaddell" class="contact-button">GitHub</a>
+                <a href="mailto:victor@example.com" class="contact-button">Email</a>
+            </div>
+        </section>
     </main>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>
