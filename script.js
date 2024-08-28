@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Sticky Navbar that appears on scroll
+    const header = document.querySelector('header');
+    const landingSection = document.querySelector('.profile-section');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            header.classList.toggle('header-visible', !entry.isIntersecting);
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(landingSection);
+
     // Function to initialize the 3D image
     const initBasicThreeJS = (containerId, imageUrl) => {
         const container = document.getElementById(containerId);
@@ -8,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Set container dimensions and initially hide it
-        container.style.width = '400px';
-        container.style.height = '400px';
+        container.style.width = '10%';
+        container.style.height = '100%';
         container.style.visibility = 'hidden';
         container.style.opacity = '0';
         container.style.transition = 'opacity 0.5s ease';
@@ -22,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
-        camera.position.z = 3.5;
+        camera.position.z = 2.5;
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
@@ -37,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Start the rotation animation
             const animate = () => {
-                plane.rotation.y += 0.01;
+                plane.rotation.y += 0.0025;
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);
             };
