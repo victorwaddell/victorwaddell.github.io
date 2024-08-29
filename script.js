@@ -11,7 +11,131 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(landingSection);
 
-    // Function to initialize the 3D image
+    // Word map animation
+    const words = document.querySelectorAll('.word');
+    const containerHeight = document.querySelector('.word-map-container').offsetHeight;
+    const wordCount = words.length;
+
+    const primaryHue = 220;
+    const primarySaturation = '57%';
+
+    const verticalSpacing = containerHeight / wordCount * 1.25;
+
+    words.forEach((word, index) => {
+        const startPosY = index * verticalSpacing;
+        const delay = index * 1;
+        word.style.top = `${startPosY}px`;
+        word.style.animationDelay = `${delay}s`;
+
+        const randomDuration = 10 + Math.random() * 15;
+        word.style.animationDuration = `${randomDuration}s`;
+
+        const lightness = 50 + Math.random() * 40;
+        word.style.backgroundColor = `hsl(${primaryHue}, ${primarySaturation}, ${lightness}%)`;
+    });
+
+    // Function to determine if the background color is light, medium, or dark
+    function getColorCategory(color) {
+        const tempElement = document.createElement('div');
+        tempElement.style.color = color;
+        document.body.appendChild(tempElement);
+        const computedColor = window.getComputedStyle(tempElement).color;
+        document.body.removeChild(tempElement);
+
+        // Extract RGB values
+        const rgb = computedColor.match(/\d+/g).map(Number);
+
+        // Calculate brightness (using the formula for luminance)
+        const brightness = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255;
+        
+        if (brightness > 0.75) return 'light';
+        if (brightness > 0.5) return 'medium-light';
+        if (brightness > 0.25) return 'medium-dark';
+        return 'dark';
+    }
+
+    // Apply different text colors based on background brightness
+    document.querySelectorAll('.word').forEach(word => {
+        const bgColor = window.getComputedStyle(word).backgroundColor;
+        const colorCategory = getColorCategory(bgColor);
+        
+        switch (colorCategory) {
+            case 'light':
+                word.style.color = '#0b2545';
+                break;
+            case 'medium-light':
+                word.style.color = '#1a4e8a';
+                break;
+            case 'medium-dark':
+                word.style.color = '#d1e0ff';
+                break;
+            case 'dark':
+                word.style.color = '#ffffff';
+                break;
+        }
+    });
+
+    // Rotating Scotty Dog in the About Section
+    const initScottyDog = () => {
+        const scottyContainer = document.getElementById('scotty-dog-container');
+        if (!scottyContainer) return;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, scottyContainer.clientWidth / scottyContainer.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        camera.position.z = 2.25;
+        renderer.setSize(scottyContainer.clientWidth, scottyContainer.clientHeight);
+        renderer.setClearColor(0x000000, 0);
+        scottyContainer.appendChild(renderer.domElement);
+
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load('assets/cmu-scotty-scarf-left-800w.png', (texture) => {
+            const geometry = new THREE.PlaneGeometry(2.5, 2.5);
+
+            const material = new THREE.MeshPhongMaterial({
+                map: texture,
+                shininess: 60,
+                transparent: true,
+                side: THREE.DoubleSide,
+            });
+
+            const plane = new THREE.Mesh(geometry, material);
+            scene.add(plane);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(1, 1, 1).normalize();
+            scene.add(ambientLight);
+            scene.add(directionalLight);
+
+            const rotationSpeed = 0.001;
+            const maxRotation = 0.4;
+            let direction = -1;
+
+            const animate = () => {
+                plane.rotation.y += direction * rotationSpeed;
+                if (plane.rotation.y > maxRotation || plane.rotation.y < -maxRotation) {
+                    direction *= -1;
+                }
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            };
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = scottyContainer.clientWidth / scottyContainer.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(scottyContainer.clientWidth, scottyContainer.clientHeight);
+            });
+        });
+    };
+
+    initScottyDog();
+
+    // Three.js initialization for job card images
+    let activeInitialization = null;
+    
     const initBasicThreeJS = (containerId, imageUrl) => {
         const container = document.getElementById(containerId);
         if (!container) {
@@ -19,54 +143,78 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Set container dimensions and initially hide it
+        if (activeInitialization) {
+            clearTimeout(activeInitialization);
+            activeInitialization = null;
+        }
+
+        container.innerHTML = '';
         container.style.width = '10%';
         container.style.height = '100%';
         container.style.visibility = 'hidden';
         container.style.opacity = '0';
         container.style.transition = 'opacity 0.5s ease';
 
-        // Clear any existing content
-        container.innerHTML = '';
+        activeInitialization = setTimeout(() => {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
-        // Create the Three.js scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-
-        camera.position.z = 2.5;
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setClearColor(0x000000, 0);
-        container.appendChild(renderer.domElement);
-
-        // Load the texture and create a plane geometry
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.load(imageUrl, (texture) => {
-            const geometry = new THREE.PlaneGeometry(2.5, 2.5);
-            const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-            const plane = new THREE.Mesh(geometry, material);
-            scene.add(plane);
-
-            // Start the rotation animation
-            const animate = () => {
-                plane.rotation.y += 0.0025;
-                renderer.render(scene, camera);
-                requestAnimationFrame(animate);
-            };
-            animate();
-        });
-
-        // Handle window resizing
-        window.addEventListener('resize', () => {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
+            camera.position.z = 2.75;
             renderer.setSize(container.clientWidth, container.clientHeight);
-        });
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.load(imageUrl, (texture) => {
+                const geometry = new THREE.PlaneGeometry(2.5, 2.5);
+
+                const material = new THREE.MeshPhongMaterial({
+                    map: texture,
+                    shininess: 60,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                });
+
+                const plane = new THREE.Mesh(geometry, material);
+                scene.add(plane);
+
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+                directionalLight.position.set(1, 1, 1).normalize();
+                scene.add(ambientLight);
+                scene.add(directionalLight);
+
+                let direction = -1;
+                const rotationSpeed = 0.001;
+                const maxRotation = 0.4;
+
+                const animate = () => {
+                    plane.rotation.y += direction * rotationSpeed;
+                    if (plane.rotation.y > maxRotation || plane.rotation.y < -maxRotation) {
+                        direction *= -1;
+                    }
+                    renderer.render(scene, camera);
+                    requestAnimationFrame(animate);
+                };
+                animate();
+
+                container.style.visibility = 'visible';
+                container.style.opacity = '1';
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+
+            activeInitialization = null;
+        }, 200);
     };
 
     // Function to handle the activation of job cards
     const activateCard = (card) => {
-        // Deactivate all job cards and hide their images
         const allCards = document.querySelectorAll('.job-card');
         allCards.forEach((otherCard) => {
             if (otherCard !== card) {
@@ -77,16 +225,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     imageContainer.style.opacity = '0';
                     setTimeout(() => {
                         imageContainer.style.visibility = 'hidden';
-                    }, 500); // Match the transition duration
+                    }, 500);
                 }
             }
         });
 
-        // Activate the clicked card
         card.classList.add('active');
         card.classList.remove('inactive');
         const imageContainer = card.nextElementSibling;
         if (imageContainer) {
+            initBasicThreeJS(imageContainer.id, getImageUrlForJob(card.getAttribute('id')));
             imageContainer.style.visibility = 'visible';
             imageContainer.style.opacity = '1';
         }
@@ -95,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners for job cards
     const jobCards = document.querySelectorAll('.job-card');
     jobCards.forEach((card) => {
-        // Initialize 3D images for all job cards on page load
         const jobId = card.getAttribute('id');
         const imageUrl = getImageUrlForJob(jobId);
         const imageContainer = card.nextElementSibling;
@@ -103,28 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
             initBasicThreeJS(imageContainer.id, imageUrl);
         }
 
-        // Hover effects
-        card.addEventListener('mouseenter', () => {
-            const imageContainer = card.nextElementSibling;
-            if (imageContainer && !card.classList.contains('active')) {
-                imageContainer.style.visibility = 'visible';
-                imageContainer.style.opacity = '1';
-            }
-        });
-
-        card.addEventListener('mouseleave', () => {
-            const imageContainer = card.nextElementSibling;
-            if (imageContainer && !card.classList.contains('active')) {
-                imageContainer.style.opacity = '0';
-                setTimeout(() => {
-                    if (!card.classList.contains('active')) {
-                        imageContainer.style.visibility = 'hidden';
-                    }
-                }, 500); // Match the transition duration
-            }
-        });
-
-        // Click to activate
         card.addEventListener('click', () => {
             activateCard(card);
         });
@@ -135,11 +260,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeCard) {
         const imageContainer = activeCard.nextElementSibling;
         if (imageContainer) {
+            initBasicThreeJS(imageContainer.id, getImageUrlForJob(activeCard.getAttribute('id')));
             imageContainer.style.visibility = 'visible';
             imageContainer.style.opacity = '1';
         }
     }
-
+    
+    // Get image URL for job card
     function getImageUrlForJob(jobId) {
         switch (jobId) {
             case 'job-1':

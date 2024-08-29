@@ -21,7 +21,6 @@
     </header>
 
     <main>
-        <!-- Landing Page and Intro -->
         <section id="landing" class="profile-section">
             <div class="profile-container">
                 <img src="assets/profilepics/vic1.jpg" alt="Victor Waddell" class="profile-image">
@@ -35,15 +34,59 @@
             </div>
         </section>
 
-        <!-- About Me Section -->
-        <section id="about" class="about-section">
-            <h2 class="section-title">About Me</h2>
-            <p>Welcome to my portfolio! I'm Victor Waddell, a software developer with a passion for technology, video games, and caring for the community. Explore my journey and experiences as you scroll through my work and achievements.</p>
+        <section id="wordmap" class="wordmap-section">
+            <!-- Word Map Container -->
+            <div id="word-map" class="word-map-container">
+                <div class="word" style="--weight: 9;">Perservering</div>
+                <div class="word" style="--weight: 3;">Supportive</div>
+                <div class="word" style="--weight: 3;">Passionate</div>
+                <div class="word" style="--weight: 4;">Team Player</div>
+                <div class="word" style="--weight: 3;">Analytical</div>
+                <div class="word" style="--weight: 4;">Detail Oriented</div>
+                <div class="word" style="--weight: 8;">Integrity</div>
+                <div class="word" style="--weight: 2;">Resourceful</div>
+                <div class="word" style="--weight: 5;">Hard Working</div>
+                <div class="word" style="--weight: 2;">Adaptable</div>
+                <div class="word" style="--weight: 3;">Communicative</div>
+                <div class="word" style="--weight: 4;">Reliable</div>
+                <div class="word" style="--weight: 5;">Accountable</div>
+                <div class="word" style="--weight: 5;">Collaborator</div>
+                <div class="word" style="--weight: 2;">Problem Solver</div>
+                <div class="word" style="--weight: 5;">Creative</div>
+                <div class="word" style="--weight: 5;">Determined</div>
+                <div class="word" style="--weight: 3;">Takes Initiative</div>
+                <div class="word" style="--weight: 4;">Curious</div>
+            </div>
         </section>
 
-        <!-- Job Experience Section -->
+        <section id="about" class="about-section">
+            <h2 class="about-title">About Me</h2>
+            <div class="about-content">
+                <p class="about-text">
+                    I’m Victor Waddell, a dedicated software developer with a passion for technology and collaboration. My journey began as a Junior IT and Development Consultant at Dietrich Computing and Operations from fall 2021 to fall 2023. Starting as first-line support, I quickly developed my skills and transitioned into a junior AI development and consulting role, where I contributed to the adoption of generative AI, laying the groundwork for CMU's first AI-based classroom pilots in 2023.
+                </p>
+                <p class="about-text">
+                    Throughout my time there, I’ve been recognized for my ability to remain calm and think quickly in high-pressure situations, especially when assisting demanding users. My communication skills have allowed me to convey complex technical information in a way that’s accessible to everyone, a trait that has been invaluable in both professional and personal settings.
+                </p>
+                <p class="about-text">
+                    Outside of work, I’m deeply passionate about video games, which not only fuel my love for technology but also connect me with communities that share my interests. I believe in the power of relationships, whether it’s through collaborative work environments or the connections I build in my personal life. I approach every challenge with a determination to give my all, continuously striving to learn and grow.
+                </p>
+
+                <!-- Rotating Scotty Dog -->
+                <div id="scotty-dog-container" class="scotty-dog-container"></div>
+            </div>
+
+            <!-- Quote Block -->
+            <div class="quote-block">
+                <p class="quote-text">
+                    A day without learning is a day wasted. There is so much to learn and so little time to learn it.
+                    <br> - Albert Einstein
+                </p>
+            </div>
+        </section>
+        
         <section id="experience" class="experience-section">
-            <h2 class="section-title">Job Experience</h2><br><br>
+            <h2 class="job-title">Job Experience</h2><br><br>
             <div class="job-list">
                 <div class="job-card-container">
                     <div class="job-card active" id="job-1">
@@ -95,7 +138,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <h2 class="section-title">Contact Me</h2>
             <div class="contact-buttons">
@@ -107,4 +149,5 @@
     </main>
     <script src="script.js"></script>
 </body>
+
 </html>

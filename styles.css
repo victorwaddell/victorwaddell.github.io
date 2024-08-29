@@ -1,26 +1,26 @@
-/* Define the primary color and its variants */
+/* Define primary colors and variants for the website */
 :root {
     --primary-color: #405AB4;
-    --hover-color: #7d9df5; /* Lighter blue for hover effects */
-    --active-color: #e0e7ff; /* Very light blue for active state */
-    --card-bg-color: #f9f9f9; /* Off-white color for the cards */
-    --inactive-card-color: #ececec; /* Slightly more grey for inactive cards */
+    --hover-color: #7d9df5;
+    --active-color: #e0e7ff;
+    --card-bg-color: #f9f9f9;
+    --inactive-card-color: #ececec;
 }
 
-/* Body and global styles */
+/* General styling for body and global elements */
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
-/* Webkit Scrollbar */
+/* Styling for the scrollbar */
 ::-webkit-scrollbar {
-    width: 0.625rem; /* 10px equivalent */
+    width: 0.625rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -29,31 +29,31 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: var(--primary-color);
-    border-radius: 0.3125rem; /* 5px equivalent */
+    border-radius: 0.3125rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--hover-color);
 }
 
-/* Header */
+/* Styling for the header, which includes the navigation bar */
 header {
     background-color: var(--primary-color);
     color: white;
-    height: 3.125rem; /* 50px equivalent */
+    height: 3.125rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: fixed;
-    top: -3.125rem; /* Start hidden, 50px equivalent */
+    top: -3.125rem;
     width: 100%;
     z-index: 1000;
-    padding: 0 1.25rem; /* 20px equivalent */
+    padding: 0 1.25rem;
     transition: top 0.5s ease;
 }
 
 .header-visible {
-    top: 0; /* Make the header visible */
+    top: 0;
 }
 
 .nav-title {
@@ -66,16 +66,16 @@ nav {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    position: absolute; /* Position it absolutely */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust to be exactly in the center */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 nav a {
     color: white;
     text-decoration: none;
     margin: 0 1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     position: relative;
 }
 
@@ -83,7 +83,7 @@ nav a::before {
     content: "";
     position: absolute;
     width: 0;
-    height: 0.125rem; /* 2px equivalent */
+    height: 0.125rem;
     bottom: -0.125rem;
     left: 50%;
     background-color: white;
@@ -95,7 +95,7 @@ nav a:hover::before {
     left: 0;
 }
 
-/* Main Content and Sections */
+/* Main content styling and section layouts */
 main {
     width: 100%;
     display: flex;
@@ -116,12 +116,12 @@ section {
 
 h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+    font-size: 4rem;
     margin: 0;
     color: #405AB4;
 }
 
-/* Profile Section */
+/* Styling for the profile section, including background and overlay effects */
 .profile-section {
     position: relative;
     width: 100vw;
@@ -150,16 +150,18 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 60%; /* Keep the profile container at 60% of the page width */
+    width: 60%;
     z-index: 2;
 }
 
 .profile-image {
-    height: 60vh;
+    height: 75vh;
     width: auto;
     object-fit: contain;
-    border-radius: 0.9375rem; /* 15px equivalent */
-    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.2); /* 4px 15px equivalent */
+    border-radius: 0.9375rem;
+    box-shadow: 
+        10px 10px 10px rgba(255, 255, 255, 0.5),
+        25px 15px 10px rgba(0, 0, 0, 0.5);
 }
 
 .intro-content {
@@ -174,14 +176,14 @@ h2 {
 
 .intro-content h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 5rem;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Scroll Indicator */
+/* Styling for the scroll indicator */
 .scroll-indicator {
     margin-top: 1rem;
     display: flex;
@@ -191,15 +193,15 @@ h2 {
 
 .scroll-indicator span {
     display: block;
-    font-size: 1rem;
+    font-size: 2rem;
     color: white;
 }
 
 .scroll-icon {
     margin-top: 0.5rem;
-    width: 1.5rem; /* 24px equivalent */
+    width: 1.5rem;
     height: 1.5rem;
-    border: 0.125rem solid white; /* 2px equivalent */
+    border: 0.125rem solid white;
     border-radius: 50%;
     animation: scroll 1.5s infinite;
     position: relative;
@@ -210,7 +212,7 @@ h2 {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 0.5rem; /* 8px equivalent */
+    width: 0.5rem;
     height: 0.5rem;
     background-color: white;
     border-radius: 50%;
@@ -222,19 +224,175 @@ h2 {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(0.625rem); /* 10px equivalent */
+        transform: translateY(0.625rem);
     }
     100% {
         transform: translateY(0);
     }
 }
 
-/* Job Experience Section */
+/* Word Map Styling */
+.wordmap-section {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 10%;
+}
+
+.word-map-container {
+    position: relative;
+    width: 100%;
+    height: 75%;
+    overflow: visible;
+    margin-top: 2rem;
+    pointer-events: none;
+}
+
+.word {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: white;
+    opacity: 1;
+    font-size: calc(1rem + var(--weight) * 0.5rem);
+    white-space: nowrap;
+    will-change: transform;
+    padding: 0.5rem 1rem;
+    left: -25%;
+    animation: floatInLeft 30s linear infinite;
+    border-radius: 0.5rem;
+}
+
+/* Animation to float the words from left to right */
+@keyframes floatInLeft {
+    0% {
+        transform: translateX(0vw);
+    }
+    100% {
+        transform: translateX(200vw);
+    }
+}
+
+/* About Section Styling */
+.about-section {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+    margin-bottom: 10%
+}
+
+.about-title {
+    margin-top: 20%;
+    margin-bottom: 2rem;
+    padding: 2rem;
+}
+
+.about-content {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 
+        10px 10px 20px rgba(0, 0, 0, 0.1),
+        -5px -5px 15px rgba(255, 255, 255, 0.5);
+    max-width: 80%;
+    text-align: left;
+    color: #333;
+    transition: transform 0.3s ease-in-out;
+}
+
+.about-content:hover {
+    transform: translate(5px, 5px);
+}
+
+.about-text {
+    font-size: 2rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+/* Quote Block Styling */
+.quote-block {
+    position: relative;
+    padding: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #333;
+    text-align: center;
+    max-width: 80%;
+    margin: 20rem auto;
+    border-left: 0.5rem solid var(--primary-color);
+}
+
+.quote-block::before, .quote-block::after {
+    content: '“';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 10rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    line-height: 0;
+}
+
+.quote-block::before {
+    top: -6rem;
+    left: -3rem;
+}
+
+.quote-block::after {
+    content: '”';
+    bottom: -6rem;
+    right: -3rem;
+}
+
+.quote-text {
+    display: inline-block;
+    text-align: left;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #666;
+}
+
+/* Scotty Dog Container */
+.scotty-dog-container {
+    margin-top: 2rem;
+    width: 200px; /* Set the size of the container */
+    height: 200px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Job experience section layout and card styling */
+.experience-section {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+    margin-top: 25%;
+}
+
+.job-title {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
 .job-list {
     display: flex;
-    flex-direction: column; 
-    width: 100%;   
+    flex-direction: column;
+    width: 100%;
     align-items: left;
+    gap: 2rem;
 }
 
 .job-card-container {
@@ -243,7 +401,7 @@ h2 {
     align-items: center;
     justify-content: space-between;
     width: 70%;
-    margin-left: 15%; /* Add margin to the left of the job card container */
+    margin-left: 15%;
     padding: 10px;
     box-sizing: border-box;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -254,7 +412,7 @@ h2 {
     background-color: var(--card-bg-color);
     box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
-    padding: 1rem 2rem; /* Increase padding to make the card longer */
+    padding: 1rem 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     transform-origin: center;
     display: flex;
@@ -262,7 +420,7 @@ h2 {
     justify-content: space-between;
     align-items: left;
     cursor: pointer;
-    width: 100%; /* Increase card width to 65% of the page */
+    width: 100%;
     height: auto;
     text-align: left;
     overflow: visible;
@@ -274,24 +432,21 @@ h2 {
     width: 100%;
 }
 
-/* Image container styling */
+/* Styling for the 3D image container */
 .job-image-container {
-    width: auto;
-    height: 110%;
+    position: relative;
     flex-shrink: 0;
     transition: opacity 0.5s ease;
-    position: relative;
+    margin-left: 5rem;
 }
 
-/* Hover and active states */
 .job-card.active + .job-image-container {
     opacity: 1;
-    transform: translateY(-50%);
 }
 
 .job-card.active {
     background-color: var(--active-color);
-    transform: translateX(-10%) scale(1.2); /* Translate the entire card left */
+    transform: translateX(-10%) scale(1.2);
 }
 
 .job-card.inactive {
@@ -331,69 +486,235 @@ h2 {
     margin-bottom: 0.5rem;
 }
 
-/* 3D Image Section */
-.job-image-container {
-    top: 50%;
-    transform: translateY(-50%);
-    width: auto;
-    height: 100%;
-    margin-left: 5rem;
-    z-index: 999; /* Ensure it's on top of other elements */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible; /* Ensure visibility */
-    pointer-events: none; /* Prevent the container from blocking interactions */
-}
+/* Mobile Styling */
+@media (max-width: 48rem) {
+    body {
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+    }
 
-/* Mobile-Friendly Styles */
-@media (max-width: 48rem) { /* 768px equivalent */
-    .profile-container {
+    header {
+        height: 3.125rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+        transition: top 0.5s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .header-visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .nav-title {
+        font-size: 1.5rem;
+    }
+
+    nav {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 100%;
+    }
+
+    nav a {
+        margin: 0.5rem 0;
+        font-size: 1.2rem;
+        color: white;
+        text-decoration: none;
+    }
+
+    main {
+        margin-top: 0;
+        width: 100%;
+    }
+
+    .profile-section {
+        width: 100vw;
+        height: 100vh;
         padding: 0;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .profile-image {
-        max-width: 80vw;
+        width: 50vw;
         height: auto;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 
+            5px 5px 5px rgba(255, 255, 255, 0.5),
+            10px 10px 5px rgba(0, 0, 0, 0.3);
     }
 
     .intro-content {
-        max-width: 90%;
-        text-align: center;
-        align-items: center;
-        white-space: normal;
-    }
-
-    .job-list {
-        align-items: center;
-    }
-
-    .job-card-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%; /* Limit the job card container width to 60% of the page */
-        margin-left: 15%; /* Add margin to the left of the job card container */
-    }
-
-    .job-card {
-        width: 100%; /* Adjust the card width for mobile */
-        margin-left: 0; /* Center the card */
-    }
-
-    .job-image-container {
-        display: none; /* Hide the image container on mobile */
-    }
-
-    .job-description-section {
         width: 100%;
+        text-align: center;
+        white-space: normal;
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .intro-content h1 {
         font-size: 2rem;
+        margin: 0;
+    }
+
+    .scroll-indicator {
+        margin-top: 1rem;
+    }
+
+    .scroll-indicator span {
+        font-size: 1.5rem;
+    }
+
+    .scroll-icon {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    section {
+        width: 100%;
+        padding: 4rem 1rem;
+        text-align: center;
+    }
+
+    h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .wordmap-section {
+        margin-bottom: 100%;
+        width: 100vw;
+    }
+
+    .word-map-container {
+        height: 50%;
+        width: 100%;
+    }
+
+    .word {
+        font-size: calc(0.75rem + var(--weight) * 0.4rem);
+        word-wrap: break-word;
+        left: -100%; /* Start the words off-screen to the left */
+    }
+
+    @keyframes floatInLeft {
+        0% {
+            transform: translateX(-50vw);
+        }
+        100% {
+            transform: translateX(250vw);
+        }
+    }
+
+    .about-section {
+        margin-top: 20rem;
+        margin-bottom: 200%;
+        width: 100vw;
+    }
+
+    .about-content {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+
+    .about-text {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .quote-block {
+        font-size: 1.25rem;
+        margin-top: 2rem;
+        padding: 1rem;
+    }
+
+    .scotty-dog-container {
+        width: 150px;
+        height: 150px;
+        margin-top: 2.5rem;
+    }
+
+    .job-title {
+        font-size: 2.5rem;
+        margin-top: 10rem;
+        margin-bottom: 5rem;
+    }
+
+    .job-list {
+        align-items: center;
+        gap: 3rem;
+        padding: 0 1rem;
+        width: 100%;
+    }
+
+    .job-card-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .job-card {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+        box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2);
+        transform: none;
+    }
+
+    .job-card.active {
+        transform: none;
+        background-color: var(--active-color);
+    }
+
+    .job-description-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .job-description-section h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .job-description-section ul li {
+        font-size: 1rem;
+    }
+
+    .job-image-container {
+        display: none;
     }
 }
