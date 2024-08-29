@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-content">
+    <h4>Your Cart</h4><br>
+    <% if @items_in_cart.empty? %>
+          <h6><b>Your cart is currently empty.</b></h6><br>
+          <div class="btn"><%= link_to "Start shopping", items_path %></div><br>
+    <% else %>
+          <%= render :partial => "cart_details" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module Handling404ApplicationHelper
+end

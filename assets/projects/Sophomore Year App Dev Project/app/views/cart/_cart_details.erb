@@ -1,0 +1,21 @@
+<% for order_item in @items_in_cart %>
+    <div class="card z-depth-0">
+        <div class="card-action">
+            <div class="row">
+                <div class="col s8 m8">
+                    <p><%= link_to order_item.item.name, item_path(order_item.item.id) %></p>
+                    <p><b>Color: </b><%= order_item.item.color %></p>
+                    <p><b>Weight: </b><%= order_item.item.weight %> lbs</p>
+                </div>
+                <div class="col right-align">
+                    <p><b>Unit Price: </b><%= number_to_currency(order_item.item.current_retail_price) %></p>
+                    <p><b>Subtotal: </b><%= number_to_currency(order_item.item.current_retail_price * order_item.quantity) %></p>
+                </div>
+            </div>
+                <p><b>Quantity: </b><%= order_item.quantity %> | <%= link_to "Remove", remove_item_path(order_item.item) %></p>
+        </div>
+    </div>
+<% end %><br>
+
+<div class="btn"><%= link_to "Empty cart", empty_cart_path(cart: session[:cart]) %></div><br><br>
+<div class="btn"><%= link_to "Continue shopping", items_path %></div>

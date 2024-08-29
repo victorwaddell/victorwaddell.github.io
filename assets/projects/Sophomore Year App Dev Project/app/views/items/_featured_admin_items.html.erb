@@ -1,0 +1,23 @@
+<h5>Featured Items at GPBO</h5><br>
+<% if @featured_items.empty? %>
+  <p><b>There are no featured items in that category at this time.</b></p><br>
+<% else %>
+          <table class="striped highlight">
+            <thead>
+              <th>Name</th>
+              <th>Price</th>       
+              <th>Inventory</th>  
+            </thead>
+
+          <% for item in @featured_items %>
+              <tr>
+                <td><%= link_to item.name, item_path(item) %></td>
+                <td><%= number_to_currency(item.current_retail_price) %></td>
+                <td><%= item.inventory_level %></td>
+              </tr>
+          <% end %>
+
+          </table>
+<% end %>  
+
+<br><hr>

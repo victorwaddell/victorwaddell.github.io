@@ -1,0 +1,24 @@
+<% if @customer.addresses.empty? %>
+ <p>No address for customer</p><br>
+<% else %>
+<table class="striped highlight">
+        <thead>
+          <th>Customer</th>
+          <th>Recipient</th>
+          <th>Street</th>
+          <th>State</th>
+        </thead>
+
+
+        <% for address in @customer.addresses %>
+              <tr>
+                <td><%= @customer.proper_name %></td>
+                <td><%= "#{address.recipient}" %>
+                <td><%= "#{address.street_1}" %><br><%= "#{address.street_2}" %></td>
+                <td><%= "#{address.city}, #{address.state} #{address.zip}" %>
+              </tr>
+        <% end %>
+        
+        
+</table><br></td>
+<% end %>

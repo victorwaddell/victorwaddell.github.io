@@ -1,0 +1,24 @@
+<% if @active_customers.empty? %>
+  <h4>No active customers at this time</h4>
+<% else %>
+  <h4>Active Customers in GPBO</h4>
+  <table class="striped highlight">
+    <thead>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </thead>
+
+    <% for customer in @active_customers %>
+      <tr>
+        <td><%= link_to "#{customer.last_name}, #{customer.first_name}", customer_path(customer) %></td>
+        <td><%= number_to_phone customer.phone %></td>
+        <td><%= mail_to customer.email, customer.email, encode: "javascript" %></td>
+      </tr>
+    <% end %>
+    
+  </table>
+  <br />
+
+  <%= will_paginate @active_customers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>

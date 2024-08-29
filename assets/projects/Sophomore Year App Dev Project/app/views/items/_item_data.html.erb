@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= @item.name %></h4><hr><br>
+    <br>    
+    
+    <p><b>Description: </b><%= @item.description %></p><br>
+    <p><b>Color: </b><%= @item.color %></p><br />
+    <p><b>Weight: </b><%= @item.weight %> lbs</p><br>
+    <% if !@item.item_prices.empty? %>
+      <p><b>Current Price: </b><%= number_to_currency(@item.current_retail_price) %></p><br>
+    <% end %>
+
+    <% if logged_in? %>
+      <% if current_user.role == "admin" %>
+        <%= render :partial => "admin_item_data", locals: {item: @item} %>
+      <% else %>
+        <div class="btn"><%= link_to "Add to Cart", add_item_path(@item) %></div>
+      <% end %>
+    <% end %>
+    
+  </div>
+</div>

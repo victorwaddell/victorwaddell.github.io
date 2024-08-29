@@ -1,0 +1,58 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require overrides
+ */
+
+ @import "materialize";
+ @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+// #toast-container {
+//     left: auto !important;
+//     right: 0%;
+//     top: 80%;
+// }
+
+body {
+    font-family: 'Montserrat';
+}
+
+.brand-logo {
+     font-family: 'Open Sans';
+     font-size: 1.5em;
+     margin-left: 2%;
+ }
+
+.card-action a {
+    color: lightseagreen!important;
+}
+
+h4 {
+     font-size: 1.4em;
+ }
+
+h5 {
+    font-size: 1.35em;
+}
+
+h6 {
+    font-size: 1.25em;
+}
+
+h4, h5, h6 {
+    font-family: 'Open Sans';
+}
+
+ .btn a {
+     color: #fff!important;
+ }

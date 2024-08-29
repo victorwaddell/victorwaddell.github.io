@@ -1,0 +1,13 @@
+<div class="card center-align">
+    <div class="card-content">
+
+        <h4>Order Costs</h4><br>
+        <p><b>Subtotal: </b><%= number_to_currency(@subtotal) %></p>
+        <p><b>Shipping: </b><%= number_to_currency(@shipping_cost) %></p><br><hr><br>
+
+        <h5>Grand Total: <%= number_to_currency(@total) %></h5><br>
+
+        <div class="btn"><%= link_to "Checkout", checkout_path %></div>
+        
+    </div>
+</div>

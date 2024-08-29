@@ -1,0 +1,25 @@
+<% if !@item.item_prices.empty? %>
+  <div class="card">
+    <div class="card-content">
+
+  <h5>Similar Items</h5>
+        <table class="striped highlight">
+              <thead>
+                <th>Name</th>
+                <th>Price</th>
+              </thead>
+
+            <% for item in @similar_items %>
+                <tr>
+                  <td><%= link_to item.name, item_path(item) %></td>
+                  <td><%= number_to_currency(item.current_retail_price) %></td>
+                </tr>
+            <% end %>
+
+  </table><br> 
+
+  <div class="btn"><td><%= link_to "Display All", items_path %></td></div><br>
+
+    </div>
+  </div>
+<% end %>

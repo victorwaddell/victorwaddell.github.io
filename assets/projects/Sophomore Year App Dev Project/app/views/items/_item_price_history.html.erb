@@ -1,0 +1,22 @@
+<% if !@item.item_prices.empty? %>
+    <h5>Price History</h5>
+      <table class="striped highlight">
+        <thead>
+            <th>Date</th>
+            <th>Price</th>   
+        </thead>
+
+    
+      <% for price in @item.item_prices %>
+                <tr>
+                  <td><%= price.start_date.strftime("%B %d, %Y") %></td>
+                  <td><%= number_to_currency(price.price) %></td>
+                </tr>
+      <% end %><br>
+
+    </table><br>
+<% end %>
+
+<% if can? :new, ItemPrice %>
+        <div class="btn"><%= link_to "Add a New Price", new_item_price_path(item_id: @item.id) %></div>
+<% end %>

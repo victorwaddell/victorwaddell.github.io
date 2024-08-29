@@ -1,0 +1,20 @@
+<h5>All Orders</h5><br />
+<table class="striped highlight">
+            <thead>
+              <th>Date</th>
+              <th>Recipient</th>       
+              <th>Item Count</th> 
+              <th>Cost</th>
+            </thead>
+
+          <% if !@all_orders.empty? %>
+            <% for order in @all_orders %>
+                <tr>
+                  <td><%= link_to order.date.strftime("%m/%d/%y"), order_path(order) %></td>
+                  <td><%= order.address.recipient %></td>
+                  <td><%= order.order_items.count %></td>
+                  <td><%= number_to_currency(order.grand_total) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+</table>

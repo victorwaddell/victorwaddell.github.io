@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-content">
+        <%= simple_form_for(@order) do |f| %>
+        <%= f.error_notification %>
+        <div class="row">
+            <div class="form-inputs">
+            <%= f.input :customer_id, as: :hidden, input_html: { value: current_user.customer.id } %>
+            <%= f.input :address_id, collection: get_address_options_long(current_user) %>
+            <%= f.input :credit_card_number, label_html: { class: 'active' } %>
+            <%= f.input :expiration_month, collection: 1..12 %>
+            <%= f.input :expiration_year, collection: 2022..2027 %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-actions col s8">
+            <%= f.button :submit, value: "Place order" %>
+            </div>
+        </div>
+        <% end %>
+
+        <div class="btn"><%= link_to "Add a new address", new_address_path %></div>
+
+
+    </div>
+</div>

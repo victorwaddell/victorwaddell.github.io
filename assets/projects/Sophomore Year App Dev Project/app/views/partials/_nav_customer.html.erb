@@ -1,0 +1,19 @@
+<nav id="nav">
+      <a href="/home" class="brand-logo">Greater Pittsburgh Baking Outlet</a>
+      <ul class="right hide-on-med-and-down">
+        <li><%= link_to 'Items', items_path %></li>
+        <li><%= link_to 'My Account', customer_path(current_user.customer) %></li>
+        <li><%= link_to 'My Orders', orders_path %></li>
+        <li><%= link_to 'My Addresses', addresses_path %></li>
+        <% if !session[:cart].nil? %>
+          <% if session[:cart].count >= 1 %>
+            <li><%= link_to "View Cart(#{session[:cart].size})", view_cart_url %></li>
+          <% else %>
+            <li><%= link_to 'View Cart', view_cart_url %></li>
+          <% end %>
+        <% end %>
+        <li><%= link_to 'Logout', logout_path%></li>
+      </ul>
+    
+
+</nav>

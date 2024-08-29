@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-content">
+    <%# Customer details when showing account %>
+    <h4><%= @customer.proper_name %></h4> 
+    <h6>A GPBO customer since <%= @customer.created_at.strftime("%Y") %></h6><hr><br>
+
+    
+
+    <b>Email:&nbsp;&nbsp;</b><br>
+      <%= best_in_place @customer, :email, as: :input %><br /><br />
+
+    <b>Phone:&nbsp;&nbsp;</b><br>
+      <%= best_in_place @customer, :phone, as: :input, display_with: :number_to_phone %><br /><br />
+
+    <h6>Addresses on file:</h6>
+      <%= render :partial => "customer_addresses" %>
+      
+    <h6>Order History:</h6>
+      <%= render :partial => "customer_orders" %>
+
+    <p><b>Active: <%= @customer.active ? 'Yes' : 'No' %></b></p>
+
+    
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-content">  
+  <h5>Previous Orders</h5>
+  <% if (@previous_orders - [@order]).empty? %>
+    <p>There are no previous orders for this customer.</p>
+  <% else %>
+        <table class="striped highlight">
+              <thead>
+                <th>Date</th>
+                <th>Price</th>
+              </thead>
+
+                <% for order in @previous_orders - [@order] %>
+                    <tr>
+                      <td><%= link_to order.date.strftime("%m/%d/%y"), order_path(order) %></td>
+                      <td><%= number_to_currency(order.grand_total) %></td>
+                    </tr>
+                <% end %>
+              </table><br> 
+    <% end %>
+  
+
+  </div>
+</div>

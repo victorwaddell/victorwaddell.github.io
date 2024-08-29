@@ -1,0 +1,161 @@
+<!DOCTYPE html> <!--Indicates this is HTML 5-->
+<html lang="en"> <!--Root for html doc--> 
+<head> <!--Title and similar info will be stored in head tag--> 
+    <!--META tags for search engine-->
+    <meta charset="utf-8" /> <!--Encoding for HTML document-->
+    <meta name="author" content="Duquesne Incline">
+    <meta name="keywords" content="Pittsburgh Tourism, Historical Sites, Inclines, Society for the Preservation of The Duquesne Heights Incline">
+    <meta name="description" content="Duquesne Incline website">
+
+    <!--Title-->
+    <title>Duquesne Incline</title>
+    <!--External Link to CSS file-->
+    <link rel="stylesheet" media="all" type="text/css" href="css/styles.css"/>
+    <link rel="stylesheet" media="all" type="text/css" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" media="all" type="text/css" href="css/jquery.lightbox.css" />
+    <!--External Links to JS files-->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.lightbox.min.js"></script>
+
+</head> <!--Close header-->
+
+<body>
+    <!--Text and other content are stored in body-->
+    <div id="top_row">
+        <!--Header organization-->
+        <header>
+            <!--Header tag to organize content at the top of page-->
+            <img src="images/Cov_banner.png" class="Cov_banner" alt="Covid Banner, Mask Mandate/">
+            <img src="images/DuquesneInclineWiki.jpg" class="bannerphoto" alt="Photo of Duquesne Incline" />
+            <img src="images/duquesne_incline_logo_trans.png" class="logo" alt="Duquesne Logo" />
+            <h1>The Duquesne Incline</h1>
+            <h2>The state of Pennsylvania requires a mask to be worn at all times.</h2>
+            <h3>The Society for the Preservation of the Duquesne Heights Incline</h3>
+        </header>
+
+        <nav>
+            <!--Links for further pages-->
+            <a href="index.html">Home</a>
+            <a href="Tour.html">Tour</a>
+            <a href="Gift_Shop.html">Gift Shop</a>
+            <a href="About.html">About the Incline</a>
+            <a class="selected" href="Contact.html">Contact Us</a>
+            <!--href to take user to new pages-->
+        </nav>
+    </div> <!--Close top_row-->
+    
+    <div id="container">
+
+        <div id="content"><!--Content id tag for external CSS page to organize the content of website-->
+            <h3>Contact Us</h3>
+            <table> 
+                    <tr>
+                        <td>
+                        Mondays     05:30AM - 12:30AM<br>
+                        Tuesdays	05:30AM - 12:30AM<br>
+                        Wednesdays 	05:30AM - 12:30AM<br>
+                        Thursdays 	05:30AM - 12:30AM<br>
+                        Fridays		05:30AM - 12:30AM<br>
+                        Saturdays 	05:30AM - 12:30AM<br>
+                        Sundays		07:00AM - 12:30AM<br>
+                        Holidays 	07:00AM - 12:30AM<br>
+                        We're open 365 days a year!<p></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duquesne Incline</strong><br />
+                            <!--Main Contact Information for Duquesne in Sidebar-->
+                            1197 West Carson St.<br />
+                            Pittsburgh, PA. 15219<br /></td>
+                    </tr>
+                    <tr>
+                        <td>412-381-1665 (h)<br />
+                            412-381-1943 (fax)<br /><br /></td>
+                    </tr>
+                    <tr>
+                        <td><a href="mailto:duq.incline@duquesneincline.org"><strong>duq.incline@duquesneincline.org</strong></a></td>
+                    </tr>
+                    <tr>  
+                        <td><a href="http://www.duquesneincline.org/"><strong>http://www.duquesneincline.org/</strong></a></td>
+                    </tr>  
+                    
+            </table>
+            
+                <h4>Please use the map below to find the Duquesne Incline.</h4>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97175.42388588547!2d-80.04091253393017!3d40.436932966258766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8834f6af788dbd6b%3A0xbdf019068d677521!2sDuquesne%20Incline!5e0!3m2!1sen!2sus!4v1618097706531!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+                <h4>Become a member</h4>
+                <form onsubmit="return validate()">
+                    <fieldset>
+                        <legend>Enter Your Contact Information</legend>
+
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name" name="name" size="20" maxlength="250"><br>
+
+                        <label for="zipcode">Zip-Code (optional):</label><br>
+                        <input type="text" id="zipcode" name="zipcode" size="20" maxlength="5"><br>
+                        
+                        <label for="phone">Please provide your phone number (no dashes or spaces):</label><br/>
+                        <input type="text" id="phone" name="phone" maxlength="10" required ><br/><br/>
+
+                        <label>Please indicate if you want to receive news updates via email</label>
+
+                        <input type="checkbox" id="choice1" name="choice1" value="OptIn">
+                        <label for="choice2">I wish to receive emails.</label><br>
+                        <input type="checkbox" id="choice2" name="choice2" value="OptOut">
+                        <label for="choice2">I do not wish to receive emails.</label><br> 
+
+                        
+                        <p>
+                        <label for="email">Please provide your email address</label>
+                        <input type="email" id="email" name="email" required>
+                        </p>
+                        
+                        <label for="pwd">Choose a password</label>
+                        <input type="password" id="pwd" name="pwd" required>
+
+                    </fieldset>
+                    <fieldset>
+                    <input type ="image" src="images/submit.png" alt="Submit Form" name= "btnimage">
+                    </fieldset>
+                </form>
+        </div> <!--Close content id tag-->
+
+        <div id="hours">
+            <!--Content id tag for hours of the  Duquesne Incline-->
+            <h3>Hours of Operation</h3>
+            <ul>
+                <li>Mondays     05:30AM - 12:30AM</li>
+                <li>Tuesdays	05:30AM - 12:30AM</li>
+                <li>Wednesdays 	05:30AM - 12:30AM</li>
+                <li>Thursdays 	05:30AM - 12:30AM</li>
+                <li>Fridays		05:30AM - 12:30AM</li>
+                <li>Saturdays 	05:30AM - 12:30AM</li>
+                <li>Sundays		07:00AM - 12:30AM</li>
+            </ul>
+        </div>
+
+        <div id="sidebar">
+            <!--Content id tag for user to contact and interact with Duquesne Incline-->
+            <h3>Contact</h3>
+            <strong>Duquesne Incline</strong><br />
+            <!--Main Contact Information for Duquesne in Sidebar-->
+            1197 West Carson St.<br />
+            Pittsburgh, PA. 15219<br />
+            412-381-1665 (h)<br />
+            412-381-1943 (fax)<br /><br />
+            <!--Links to FaceBook and Gmail for Duquesne Incline-->
+            <a href="mailto:duq.incline@duquesneincline.org"><img src="images/email.png" alt="Email Icon"></a>
+            <a href="https://www.facebook.com/TheDuquesneIncline/" target="_blank"><img src="images/facebook.png" alt="Facebook Logo" /></a>
+        </div> <!--Close sidebar-->
+
+        <footer>
+            <!--Footer Copy Right Information-->
+            Copyright &copy; 2021. Duquesne Incline<br />
+        </footer>
+
+    </div> <!--Close container-->
+</body> <!--Close body-->
+</html> <!--End of page--> 

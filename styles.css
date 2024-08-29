@@ -7,6 +7,10 @@
     --inactive-card-color: #ececec;
 }
 
+html {
+    scroll-padding-top: 3.125rem; /* Adjust this value based on your header's height */
+}
+
 /* General styling for body and global elements */
 body {
     font-family: 'Montserrat', sans-serif;
@@ -307,6 +311,7 @@ h2 {
     text-align: left;
     color: #333;
     transition: transform 0.3s ease-in-out;
+    margin-bottom: 10%;
 }
 
 .about-content:hover {
@@ -383,7 +388,6 @@ h2 {
 }
 
 .job-title {
-    margin-top: 4rem;
     margin-bottom: 2rem;
 }
 
@@ -485,6 +489,135 @@ h2 {
     line-height: 1.5;
     margin-bottom: 0.5rem;
 }
+
+/* Project section layout and card styling */
+.projects-section {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 10%;
+    width: 100%;
+    margin-top: 2rem;
+    justify-content: center;
+    grid-auto-flow: dense;
+}
+
+.project-card {
+    background-color: var(--card-bg-color);
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0.625rem 0.625rem 0.9375rem rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0.9375rem 0.9375rem 1.25rem rgba(0, 0, 0, 0.3);
+}
+
+.project-thumbnail {
+    width: 80%;
+    height: auto;
+    max-height: 60%;
+    object-fit: contain;
+    margin: auto;
+}
+
+.project-title {
+    padding: 1rem 0.5rem; /* Increased padding for more space around the text */
+    background: var(--primary-color);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    height: auto; /* Let the padding dictate the height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: 0; /* Remove any margin that might cause a white line */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.modal-content {
+    background-color: #f4f4f4;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #aaa;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-header, .modal-footer {
+    text-align: center;
+}
+
+.modal-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+}
+
+.modal-link:hover {
+    background-color: var(--hover-color);
+}
+
+
 
 /* Mobile Styling */
 @media (max-width: 48rem) {
@@ -717,4 +850,56 @@ h2 {
     .job-image-container {
         display: none;
     }
+}
+
+.contact-section {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+    width: 100%;
+}
+
+.contact-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.contact-button {
+    padding: 0.875rem 1.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.625rem 0.625rem 0.9375rem rgba(0, 0, 0, 0.2);
+    text-align: center;
+    flex: 1;
+    margin: 0 1.5%;
+}
+
+.contact-button:first-child {
+    margin-left: 2.5%;
+}
+
+.contact-button:last-child {
+    margin-right: 0;
+}
+
+.contact-button:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+}
+
+.contact-button:active {
+    background-color: var(--active-color);
+    transform: scale(0.95);
 }

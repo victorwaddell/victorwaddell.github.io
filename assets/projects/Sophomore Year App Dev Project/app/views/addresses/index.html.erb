@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-content">
+        <h5>Active Addresses</h5><br><hr><br>
+            <div id="main-row" class="row">
+                <% for address in @active_addresses %>
+                    <div class="col s4 m4">
+                        <div class="card h-200">
+                            <div class="card-content">
+                                <h6><%= address.street_1 %></h6>
+                                <p><b>Recipient: </b><%= address.recipient %></p>
+                                <p><b>Street_2: </b><%= address.street_2 %></p>
+                                <p><b>Billing Address: </b><%= address.is_billing ? 'Yes' : 'No' %></p>
+                                <p><b>City: </b><%= address.city %></p>
+                                <p><b>State: </b><%= address.state %></p>
+                                <p><b>Zip: </b><%= address.zip %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+
+        <h5>Inactive Addresses</h5><br><hr><br>
+            <div class="row">
+                <% for address in @inactive_addresses %>
+                    <div class="col s4 m4">
+                        <div class="card">
+                            <div class="card-content">
+                                <h6><%= address.street_1 %></h6>
+                                <p><b>Recipient: </b><%= address.recipient %></p>
+                                <p><b>Street_2: </b><%= address.street_2 %></p>
+                                <p><b>City: </b><%= address.city %></p>
+                                <p><b>State: </b><%= address.state %></p>
+                                <p><b>Zip: </b><%= address.zip %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+
+        <br><%= link_to(new_address_path, class: 'waves-effect waves-light btn' ) do %>
+                Add a new address
+        <% end %>
+
+  </div>
+</div> 

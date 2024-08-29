@@ -1,0 +1,20 @@
+<p><b>Inventory Level: </b><%= @item.inventory_level %></p><br>
+<p><b>Reorder Level: </b><%= @item.reorder_level %></p><br>
+
+      <!-- Switch -->
+      <% if @item.active? %>
+        <div class="btn"><%= link_to "Make Inactive", toggle_active_path(@item), method: :patch %></div><br><br>
+      <% else %>
+        <div class="btn"><%= link_to "Make Active", toggle_active_path(@item), method: :patch %></div><br><br>
+      <% end %>
+
+      <!-- Switch -->
+      <% if @item.is_featured? %>
+        <div class="btn"><%= link_to "Stop Featured", toggle_feature_path(@item), method: :patch %></div><br><br>
+      <% else %>
+        <div class="btn"><%= link_to "Make Featured", toggle_feature_path(@item), method: :patch %></div><br><br>
+      <% end %>
+      
+      <div class="btn"><%= link_to "Edit #{@item.name}", edit_item_path(@item) %></div><br><br><hr>
+
+<%= render :partial => "item_price_history", locals: {item: @item} %>

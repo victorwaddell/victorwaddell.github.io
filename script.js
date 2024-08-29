@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
             imageContainer.style.opacity = '1';
         }
     }
-    
+
     // Get image URL for job card
     function getImageUrlForJob(jobId) {
         switch (jobId) {
@@ -279,4 +279,89 @@ document.addEventListener('DOMContentLoaded', () => {
                 return '';
         }
     }
+
+    // Project modal functionality
+    const projectCards = document.querySelectorAll('.project-card');
+    const modal = document.getElementById('project-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalLink = document.getElementById('modal-link');
+
+    const projects = [
+        {
+            title: "Baking Company Dashboard Mockup",
+            description: "A dashboard mockup for a baking company, showcasing order tracking, inventory management, and sales analytics.",
+            link: "assets/projects/Baking Company Dashboard Mockup.pdf"
+        },
+        {
+            title: "Cooking App Prototype",
+            description: "An interactive prototype for a cooking app featuring recipe search, instructions, and social sharing capabilities.",
+            link: "assets/projects/Cooking App Prototype.pdf"
+        },
+        {
+            title: "Entity Relationship Diagram",
+            description: "A detailed ERD representing the relationships between different entities in a database, crucial for understanding data structures.",
+            link: "assets/projects/Entity Relationship Diagram.pdf"
+        },
+        {
+            title: "Generative AI Proposal",
+            description: "A proposal for incorporating generative AI into IT processes, focusing on efficiency improvements and automation.",
+            link: "assets/projects/Generative AI Proposal.pdf"
+        },
+        {
+            title: "Software Documentation for Company",
+            description: "Comprehensive software documentation covering installation, usage, and maintenance for a company's internal tools.",
+            link: "assets/projects/Software Documentation for Company.pdf"
+        },
+        {
+            title: "Travel App Prototype",
+            description: "A prototype for a travel app, providing AI-driven trip planning based on user preferences and integrated services.",
+            link: "assets/projects/Travel App Prototype.pdf"
+        },
+        {
+            title: "User Flow Diagram for Company",
+            description: "A user flow diagram illustrating the process flow within a company's application, highlighting user interactions and decision points.",
+            link: "assets/projects/User Flow Diagram for Company.pdf"
+        },
+        {
+            title: "Freshman Year Webapp",
+            description: "A web application developed during freshman year, showcasing basic web development skills and interactive features.",
+            link: "assets/projects/Freshman Year Webapp/Index.html"
+        },
+        {
+            title: "Sophomore Year App Dev Project",
+            description: "An app development project from sophomore year, focusing on mobile application development and UX design.",
+            link: "assets/projects/Sophomore Year App Dev Project"
+        },
+        {
+            title: "Sophomore Year Webapp",
+            description: "A more advanced web application from sophomore year, demonstrating improvements in coding and design practices.",
+            link: "assets/projects/Sophomore Year Webapp"
+        }
+    ];
+
+    projectCards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const projectId = card.getAttribute('data-project');
+            const project = projects[projectId - 1];
+
+            modalTitle.innerText = project.title;
+            modalDescription.innerText = project.description;
+            modalLink.href = project.link;
+
+            modal.style.display = 'flex';
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
 });

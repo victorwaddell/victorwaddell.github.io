@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-content">
+    <% if current_user.role == "admin" %>
+      <%= render :partial => "admin_pending_orders" %>
+      <%= render :partial => "admin_past_orders" %>
+    <% else %>
+      <%= render :partial => "customer_orders" %>
+    <% end %> 
+  </div>
+</div>

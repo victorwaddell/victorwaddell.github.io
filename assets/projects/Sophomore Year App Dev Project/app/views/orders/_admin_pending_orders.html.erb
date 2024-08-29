@@ -1,0 +1,24 @@
+<h5>Pending Orders</h5><br>
+<table class="striped highlight">
+            <thead>
+              <th>Date</th>
+              <th>Customer</th> 
+              <th>Recipient</th>       
+              <th>Item Count</th> 
+              <th>Cost</th>
+            </thead>
+
+          <% if !@pending_orders.empty? %>
+            <% for order in @pending_orders %>
+                <tr>
+                  <td><%= link_to order.date.strftime("%m/%d/%y"), order_path(order) %></td>
+                  <td><%= order.customer.name %></td>
+                  <td><%= link_to order.address.recipient, address_path(order.address) %></td>
+                  <td><%= order.order_items.count %></td>
+                  <td><%= number_to_currency(order.grand_total) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+
+
+</table>

@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-content">
+        <h5>Find by Category</h5>
+            <% for category in @categories %>
+                <% if category.active? %>
+                    <%= link_to category.name, items_path(category: category) %><hr>
+                <% end %>
+            <% end %> 
+
+        <%= link_to "All", items_path %>
+
+
+  </div>
+</div>
