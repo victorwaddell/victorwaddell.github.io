@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const primaryHue = 220;
     const primarySaturation = '57%';
 
-    const verticalSpacing = containerHeight / wordCount * 1.25;
+    const verticalSpacing = containerHeight / wordCount;
 
     words.forEach((word, index) => {
         const startPosY = index * verticalSpacing;
