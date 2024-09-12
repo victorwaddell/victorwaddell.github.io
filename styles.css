@@ -2,7 +2,7 @@
 :root {
     --primary-color: #405AB4;
     --hover-color: #7d9df5;
-    --active-color: #e0e7ff;
+    --active-color: #eaeefa;
     --card-bg-color: #f9f9f9;
     --inactive-card-color: #ececec;
 }
@@ -108,15 +108,17 @@ main {
 }
 
 section {
-    min-width: 90%;
-    min-height: 90vh;
-    padding: 2.5rem;
+    position: relative;
+    min-width: 80%;
+    min-height: 100vh;
+    padding: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     margin-bottom: 15%;
+    overflow: visible;
 }
 
 h2 {
@@ -124,6 +126,14 @@ h2 {
     font-size: 4rem;
     margin: 0;
     color: #405AB4;
+}
+
+#landing {
+    padding: 0;
+}
+
+#contact {
+    margin-bottom: 0;
 }
 
 /* Styling for the profile section, including background and overlay effects */
@@ -236,6 +246,78 @@ h2 {
     }
 }
 
+/* Background Shape Container inside each section */
+.background-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: visible;
+}
+
+/* Shape animation */
+.shape {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.5);
+    filter: blur(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.shape.triangle {
+    clip-path: polygon(
+        50% 0%,
+        0% 100%,
+        100% 100%
+    );
+}
+
+.shape.hexagon {
+    clip-path: polygon(
+        50% 0%,
+        90% 25%,
+        90% 75%,
+        50% 100%,
+        10% 75%,
+        10% 25%
+    );
+}
+
+.shape.pentagon {
+    clip-path: polygon(
+        50% 0%,
+        90% 35%,
+        70% 100%,
+        30% 100%,
+        10% 35%
+    );
+}
+
+.shape.blob {
+    border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
+}
+
+.shape.animate {
+    opacity: 1;
+    transform: scale(1);
+    animation: float 10s infinite ease-in-out;
+}
+
+/* Floating keyframes */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-30px) translateX(30px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
 /* Word Map Styling */
 .wordmap-section {
     padding: 2rem;
@@ -243,10 +325,10 @@ h2 {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #f4f4f4, 0.9;
     position: relative;
     overflow: visible;
-    margin-bottom: 15%;
+    margin-bottom: 10%;
 }
 
 .word-map-container {
@@ -267,8 +349,8 @@ h2 {
     white-space: nowrap;
     will-change: transform;
     padding: 0.5rem 1rem;
-    left: -35%;
-    animation: floatInLeft 30s linear infinite;
+    left: -100%;
+    animation: floatInLeft 15s linear infinite;
     border-radius: 0.5rem;
 }
 
@@ -291,12 +373,13 @@ h2 {
 }
 
 .about-title {
+    background-color: #f4f4f9, 0.95;
     margin-bottom: 2rem;
     padding: 2rem;
 }
 
 .about-content {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 2rem;
@@ -323,12 +406,20 @@ h2 {
 
 /* Quote Block Styling */
 .quote-block {
+    color: var(--primary-color);
+}
+
+.quote-text {
+    color: #0a0a0a;
+}
+
+.quote-block {
+    background-color: #f4f4f9, 0.9;
     position: relative;
     padding: 2rem;
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     font-style: italic;
-    color: #333;
     text-align: center;
     max-width: 80%;
     border-left: 0.5rem solid var(--primary-color);
@@ -358,8 +449,8 @@ h2 {
 /* Scotty Dog Container */
 .scotty-dog-container {
     margin-top: 2rem;
-    width: 150px;
-    height: 150px;
+    width: 15rem;
+    height: 15rem;
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -390,6 +481,7 @@ h2 {
 }
 
 .job-title {
+    background-color: #f4f4f9, 0.95;
     margin-bottom: 2rem;
 }
 
@@ -458,7 +550,7 @@ h2 {
 .job-card.inactive {
     background-color: var(--inactive-card-color);
     transform: scale(0.9);
-    opacity: 0.6;
+    opacity: 0.9;
 }
 
 .job-card.inactive:hover {
@@ -498,8 +590,12 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4f4f4;
+    background-color: #f4f4f9, 0.9;
     max-width: 1200px;
+}
+
+.projects-grid-title {
+    background: #f4f4f9, 0.95;
 }
 
 .projects-grid {
@@ -510,6 +606,7 @@ h2 {
     justify-content: center;
     grid-auto-flow: dense;
     margin-top: 5rem;
+    overflow-y: scroll;
 }
 
 .project-card {
@@ -576,7 +673,7 @@ h2 {
 }
 
 .modal-content {
-    background-color: #f4f4f4;
+    background-color: #f4f4f9;
     margin: auto;
     padding: 2rem;
     border-radius: 1rem;
@@ -806,6 +903,7 @@ h2 {
 
     /* Job Experience Section */
     .job-title {
+        background-color: #f4f4f9, 0.95;
         font-size: 2rem;
         margin-top: 3rem;
         margin-bottom: 1.5rem;
@@ -857,7 +955,7 @@ h2 {
         padding: 2rem 1rem;
         margin-top: 2rem;
         margin-bottom: 2rem;
-        background-color: #f4f4f4;
+        background-color: #f4f4f9;
     }
 
     .projects-grid {

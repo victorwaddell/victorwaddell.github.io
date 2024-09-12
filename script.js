@@ -11,6 +11,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(landingSection);
 
+    // Number of shapes to generate per section
+    const numberOfShapes = 4; 
+    const shapeContainers = document.querySelectorAll('.background-shapes');
+
+    // Function to generate random values
+    const randomValue = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+    // Function to create a random shape and append it to the container
+    const createRandomShape = (container) => {
+        const shape = document.createElement('div');
+        shape.classList.add('shape');
+
+        const width = randomValue(200, 700);
+        const height = randomValue(200, 700);
+        shape.style.width = `${width}px`;
+        shape.style.height = `${height}px`;
+
+        shape.style.top = `${randomValue(0, 80)}%`;
+        shape.style.left = `${randomValue(0, 80)}%`;
+
+        shape.style.filter = 'blur(100px)';
+
+        const shapeType = randomValue(1, 8);
+        if (shapeType === 1) {
+            shape.classList.add('triangle');
+        } else if (shapeType === 2) {
+            shape.classList.add('hexagon');
+        } else if (shapeType === 3) {
+            shape.classList.add('pentagon');
+        } else {
+            shape.classList.add('blob');
+        }
+
+        // Apply primary CSS colors
+        const colorOptions = ['var(--primary-color)', 'var(--hover-color)', 'var(--active-color)'];
+        shape.style.backgroundColor = colorOptions[randomValue(0, colorOptions.length - 1)];
+
+
+        container.appendChild(shape);
+    };
+
+    // Generate shapes for each section
+    shapeContainers.forEach((container) => {
+        for (let i = 0; i < numberOfShapes; i++) {
+            createRandomShape(container);
+        }
+    });
+
+    // Intersection Observer to trigger animations when sections are in view
+    const observerOptions = {
+        threshold: 0.3,
+    };
+
+    const shapeobserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const shapes = entry.target.querySelectorAll('.shape');
+                shapes.forEach(shape => {
+                    shape.classList.add('animate');
+                });
+            }
+        });
+    }, observerOptions);
+
+    // Observe each section
+    shapeContainers.forEach((container) => {
+        shapeobserver.observe(container.parentElement);
+    });
+
     // Word map animation
     const words = document.querySelectorAll('.word');
     const containerHeight = document.querySelector('.word-map-container').offsetHeight;
@@ -23,11 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     words.forEach((word, index) => {
         const startPosY = index * verticalSpacing;
-        const delay = index * 1;
+        const delay = index * 0.3;
         word.style.top = `${startPosY}px`;
         word.style.animationDelay = `${delay}s`;
 
-        const randomDuration = 10 + Math.random() * 15;
+        const randomDuration = 8 + Math.random() * 12;
         word.style.animationDuration = `${randomDuration}s`;
 
         const lightness = 50 + Math.random() * 40;
@@ -149,8 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         container.innerHTML = '';
-        container.style.width = '10%';
-        container.style.height = '100%';
+        container.style.width = '15rem';
+        container.style.height = '15rem';
         container.style.visibility = 'hidden';
         container.style.opacity = '0';
         container.style.transition = 'opacity 0.5s ease';
